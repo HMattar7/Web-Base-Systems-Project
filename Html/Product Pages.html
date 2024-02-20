@@ -9,27 +9,34 @@
 <body class="flex-container-column background-color">
     <header class="default header">
         <section class="head flex-container-space-between">
-        <section class="user-data flex-container-space-between">
-            <div class="box round-border">
-                <!-- <img src="/Html/images/circle.svg" alt="circle"> -->
-                <img src="/Html/images/person.svg" alt="person">
-            </div>
-            <div class="box round-border">
-                AR/SR
-            </div>
-            <div class="box round-border">
-                <!-- <img src="/Html/images/circle.svg" alt="circle"> -->
-                <img src="/Html/images/cart.svg" alt="cart">
-            </div>
-        </section>
+            <section class="header-icons">
+                <a href="profile.html" class="box round-border header-icons svg-contaior">
+                    <img class="svg-image" src="images/circle.svg" alt="circle">
+                    <img class="svg-image-overlay" src="images/person.svg" alt="person">
+                </a>
+
+            </section>
+            <section class="header-icons">
+                <div class="box round-border header-icons">
+                    <a href="settings" class="text lungs-currencies">AR/SR</a>
+                </div>
+                
+            </section>
+            <section class="header-icons">
+                <a href="cart.html" class="box round-border header-icons svg-contaior">
+                    <img class="svg-image" src="images/circle.svg" alt="circle">
+                    <img class="svg-image-overlay" src="images/cart.svg" alt="cart">
+                </a>
+                
+            </section>
         <div class="vertical-divider"></div>
-        <section class="site-logo">
-            <img src="/Html/images/Logo.svg" alt="Logo">
+        <a href="homepage.htm" style="text-decoration: none;" class="site-logo">
+            <img src="images/Logo.svg" alt="Logo">
             <h1 class="text">Games4Less</h1>
 
-        </section>
+        </a>
         <div class="vertical-divider"></div>
-        <section class="search-bar">
+        <section class="search-bar header-icons">
             <form class="" method="post"action="php">
                 <input class="search-bar" type="text" placeholder="Search" autocomplete="on">
             </form>
@@ -37,7 +44,7 @@
         </section>
     </header>
     <hr class="horizontal-divider">
-    <nav class="default flex-container-space-between navbar">
+    <nav class="default flex-container-space-between navbar large-font">
         <a href="placholder">Bestseller</a>
         <a href="placholder">PC</a>
         <a href="placholder">Playstation</a>
@@ -55,23 +62,35 @@
         </section>
         <section class="default text">
             <div class="game-name">
-                <h2 class="name-header">Name Header</h2>
+                <h2 class="name-header">Game name</h2>
             </div>
-            <div class="content-box">
-                <p>Platform:</p>
-                <p>Version:</p>
-                <p>Type:</p>
-                <p>Release Date:</p>
+            <div class="content-box bottom-margin">
+                <div class="flex-container-row">
+                    <h2 class="right-margin">Platform:</h2>
+                    <h2 >placholder</h2>
+                </div>
+                <div class="flex-container-row">
+                    <h2 class="right-margin">Version::</h2>
+                    <h2 >placholder</h2>
+                </div>
+                <div class="flex-container-row">
+                    <h2 class="right-margin">Type::</h2>
+                    <h2 >placholder</h2>
+                </div>
+                <div class="flex-container-row">
+                    <h2 class="right-margin">Release Date::</h2>
+                    <h2 >placholder</h2>
+                </div>
             </div>
-            <div class="content-box">
+            <div class=" paragraph  bottom-margin large-font ">
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec luctus maurisLorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec luctus maurisLorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec luctus maurisLorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec luctus maurisLorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec luctus mauris. </p>
             </div>
         </section>
-        <section class="default price-box text flex-container-column content-box">
+        <section class="default price-box text flex-container-column content-box ">
             <h2 class="price-header">$70.99</h2>
-            <div class="flex-container-column horizontal-margin">
-                <button type="button" class="cart-button horizontal-margin">Add to Cart</button>
-                <button type="button" class="Buy-Now-button horizontal-margin">Buy Now</button>
+            <div class="flex-container-column horizontal-margin buy-buttons">
+                <button type="button" class="cart-button horizontal-margin large-font ">Add to Cart</button>
+                <button type="button" class="Buy-Now-button horizontal-margin large-font">Buy Now</button>
             </div>
             
 
@@ -80,17 +99,17 @@
     <hr class="horizontal-divider">
     <footer class="default flex-container-space-between text">
         <section class="footer">
-            <a class="text" href="placholder">About us</a>
-            <a class="text" href="placholder">User Terms & Condition</a>
-            <a class="text" href="placholder">Support</a>
+            <a class="text text-center" href="placholder">About us</a>
+            <a class="text text-center" href="placholder">User Terms & Condition</a>
+            <a class="text text-center" href="placholder">Support</a>
         </section>
         <div class="vertical-divider"></div>
-        <section>
-            <a class="" href="placholder"><img class="" src="/images/linkedin.png" alt="Twitter Link"></a>
-            <a class="" href="placholder"><img class="" src="/images/linkedin.png" alt="Twitter Link"></a>
-            <a class="" href="placholder"><img class="" src="/images/Twitter.svg" alt="Twitter Link"></a>
-            <a class="" href="placholder"><img class="" src="/images/Twitter.svg" alt="Twitter Link"></a>
-            <a class="" href="placholder"><img class="" src="/images/Twitter.svg" alt="Twitter Link"></a>
+        <section class="outside-links">
+            <a class="" href="placholder"><img class="outside-links-image" src="images/Twitter.svg" alt="youtube Link" width="auto"></a>
+            <a class="" href="placholder"><img class="outside-links-image" src="images/Twitter.svg" alt="Twitter Link" width="auto"></a>
+            <a class="" href="placholder"><img class="outside-links-image" src="images/Twitter.svg" alt="linkedin Link" width="auto"></a>
+            <a class="" href="placholder"><img class="outside-links-image" src="images/Twitter.svg" alt="tiktok Link" width="auto"></a>
+            <a class="" href="placholder"><img class="outside-links-image" src="images/Twitter.svg" alt="instagram Link" width="auto"></a>
 
         </section>
     </footer>
