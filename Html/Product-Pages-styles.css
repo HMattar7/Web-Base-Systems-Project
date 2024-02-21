@@ -64,7 +64,7 @@
 .search-bar {
   display: flex;
   align-items: center;
-  width: 300px; /* Adjust the width as needed */
+  width: 300px;
   background-color: #f2f2f2;
   border-radius: 4px;
   padding: 8px;
