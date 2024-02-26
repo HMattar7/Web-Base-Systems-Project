@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product page</title>
-    <link rel="icon" type="image/x-icon" href="images/Logo.svg">
-    <link href="management-styles.css" type="text/css" rel="stylesheet"/>
+    <title>Profile Overview</title>
+    <link rel="icon" type="image/x-icon" href="./images/Logo.svg">
+    <link href="account-management-styles.css" type="text/css" rel="stylesheet"/>
 </head>
 <body class="flex-container-column background-color">
     <header class="default header">
@@ -31,30 +31,16 @@
                 
             </section>
         <div class="vertical-divider"></div>
-        <a href="home.html" style="text-decoration: none;" class="site-logo">
+        <a href="homepage.htm" style="text-decoration: none;" class="site-logo">
             <img src="images/Logo.svg" alt="Logo">
             <h1 class="text">Games4Less</h1>
 
         </a>
         <div class="vertical-divider"></div>
-        <section class="search-bar header-icons">
-            <form class="" method="post"action="php">
-                <input class="search-bar" type="text" placeholder="Search" autocomplete="on">
-            </form>
-        </section>
-        </section>
     </header>
 
+    <hr class="horizontal-divider">
 
-    <hr class="horizontal-divider">
-    <nav class="default flex-container-space-between navbar large-font">
-        <a href="placholder">Bestseller</a>
-        <a href="placholder">PC</a>
-        <a href="placholder">Playstation</a>
-        <a href="placholder">Xbox</a>
-        <a href="placholder">Nintendo</a>
-    </nav>
-    <hr class="horizontal-divider">
 
     <section class="default flex-container-row text">
         <section class="default text">
@@ -62,41 +48,60 @@
                 <h2 class="name-header">Account management</h2>
             </div>
             <div class="content-box bottom-margin">
-                <div class="flex-container-row">
-                    <h2><a href="./manage-profile-information.html">Manage Profile Information</a></h2>
+                <div class="flex-container-row clicked-on">
+                    <h2><a class="clicked-on" href="./profile-overview.html">Profile</a></h2>
                 </div>
-                <div class="flex-container-row">
-                    <h2><a href="./order-history.html">Order History</a></h2>
+                <div class="flex-container-row clicked-on">
+                    <h2><a class="clicked-on" href="./manage-profile-information.html">Edit Profile Information</a></h2>
                 </div>
-                <div class="flex-container-row">
-                    <h2><a href="./wishlist.html">Wishlist</a></h2>
-                </div>
-                <div class="flex-container-row">
-                    <h2><a href="./review-history.html">Review History</a></h2>
+                <div class="flex-container-row clicked-on">
+                    <h2><a class="clicked-on" href="./order-history.html">Order History</a></h2>
                 </div>
             </div>
-            
+              
         </section>
         <section class="default general-box text flex-container-column content-box ">
-            <h2 class="named-header">Wishlist</h2>
-            <div class="flex-container-column horizontal-margin">
-                <h2>Your Wishlisted items will appear here</h2>
-                <style>#wishlist-table th {padding-right: 20px;}</style>
-                    <table class="content-box general-header" id="wishlist-table">
-                      <tr>
-                        <th>Items</th>
-                        <th>Price</th>
-                        <th>Status</th>
-                      </tr>
-                      <tr></tr>
-                    </table>
+            <h2 class="named-header">Profile Overview</h2>
+            <div>
+                <form action="" method="post">
+                    <div class="flex-container-row">
+                        <div class="content-box">
+                            <h2>Username:</h2>
+                            <textarea name="username" id="username" cols="30" rows="2" disabled >placeholder</textarea>
+                        </div>
+                        <div class="content-box">
+                            <h2>Name:</h2>
+                            <textarea name="fname" id="fname" cols="30" rows="2" disabled >placeholder</textarea>
+                            <textarea name="lname" id="lname" cols="30" rows="2" disabled >placeholder</textarea>
+                        </div>
+                        <div class="content-box">
+                            <h2>Email Address:</h2>
+                            <textarea name="email" id="email" cols="30" rows="2" disabled >placeholder</textarea>
+                        </div>
+                    </div>
+                    <div class="flex-container-row">
+                        <div class="content-box">
+                            <h2>Phone number:</h2>
+                            <textarea name="phone-num" id="phone-num" cols="30" rows="2" disabled >placeholder</textarea>
+                        </div>
+                        <div class="content-box">
+                            <h2>Country:</h2>
+                            <textarea name="country" id="country" cols="30" rows="2" disabled >placeholder</textarea>
+                        </div>
+                    </div>
+                    <div class="content-box">
+                        <h2>Password:</h2>
+                        <textarea name="password" id="password" cols="30" rows="2" disabled >placeholder</textarea>
+                    </div>
+                    <br>
+                </form>
             </div>
         </section>
     </section>
 
 
     <hr class="horizontal-divider">
- 
+    
     <footer class="default flex-container-space-between text">
         <section class="footer">
             <a class="text text-center" href="placholder">About us</a>

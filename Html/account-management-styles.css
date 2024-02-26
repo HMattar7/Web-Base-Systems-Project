@@ -37,6 +37,16 @@
   width: 90%;
 }
 
+.clicked-on {
+  color: rgb(255, 255, 255) !important;
+  text-decoration: none; 
+  transition: transform 0.15s ease-in-out;
+}
+
+.clicked-on:hover {
+transform: scale(1.1);
+}
+
 .box {
   flex: 1;
   height: auto;
@@ -127,7 +137,7 @@
 }
 
 .content-box{
-  border: 1px solid #797979;
+  border: 2px solid #797979;
   border-radius: 10px;
   text-align: left;
   padding-left: 25px;
