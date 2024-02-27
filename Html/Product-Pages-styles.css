@@ -264,6 +264,11 @@
   font-size: 52px;
   margin: 0;
 }
+.stock-header{
+  font-size: 32px;
+  margin: 0;
+}
+
 
 .buy-buttons {
   display: flex;
