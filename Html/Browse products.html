@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product page</title>
+    <title>Browse products</title>
     <link rel="icon" type="image/x-icon" href="images/Logo.svg">
     <link href="Product-Pages-styles.css" type="text/css" rel="stylesheet"/>
     <link href="browse-products-styles.css" type="text/css" rel="stylesheet"/>
@@ -57,10 +57,211 @@
     </nav>
     <hr class="horizontal-divider">
     <section class="content-area">
-        <section class="default text side-panel">
-            <h1>sidepanel</h1>
+        
+        <section class="default text side-panel flex-container-column">
+            <div class="page-name">
+                <h1 class="">page name</h1>
+            </div>
+            <div class="">
+                <h1>Sort By</h1>
+                <div class="flex-container">
+                    <div class="flex-item">
+                      <div class="checkbox-label">
+                        <input type="radio" name="Sort By" id="value" value="value">
+                        <label >Best Match</label>
+                      </div>
+                    </div>
+                    <div class="flex-item">
+                      <div class="checkbox-label">
+                        <input type="radio" name="Sort By" id="value" value="value">
+                        <label >Release Date</label>
+                      </div>
+                    </div>
+                    <div class="flex-item">
+                      <div class="checkbox-label">
+                        <input type="radio" name="Sort By" id="value" value="value">
+                        <label >Lowest Price</label>
+                      </div>
+                    </div>
+                    <div class="flex-item">
+                      <div class="checkbox-label">
+                        <input type="radio" name="Sort By" id="value" value="value">
+                        <label >Highest Price</label>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+            <div class="">
+                <h1>Genra</h1>
+                <div class="flex-container-column">
+                    <div class="flex-container-space-between">
+                        <button class="text-button text">
+                            FPS
+                        </button>
+                        <label>999</label>
+                    </div>
+                    <div class="flex-container-space-between">
+                        <button class="text-button text">
+                            Action
+                        </button>
+                        <label>999</label>
+                    </div>
+                    <div class="flex-container-space-between">
+                        <button class="text-button text">
+                            RPG
+                        </button>
+                        <label>999</label>
+                    </div>
+                    <div class="flex-container-space-between">
+                        <button class="text-button text">
+                            Open-Word
+                        </button>
+                        <label>999</label>
+                    </div>
+                </div>
+            </div>
+            <div class="price-range">
+                <h1>Price Range</h1>
+                <div class="flex-container-space-between">
+                    <input class="price-text-area" placeholder="From" type="text">
+                    <input class="price-text-area" placeholder="To" type="text">
+                </div>
+            </div>
+            <div class="">
+                <h1>Platform</h1>
+                <div class="flex-container">
+                    <div class="flex-item">
+                      <div class="checkbox-label">
+                        <input type="checkbox" id="checkbox1">
+                        <label for="checkbox1">PC</label>
+                      </div>
+                    </div>
+                    <div class="flex-item">
+                      <div class="checkbox-label">
+                        <input type="checkbox" id="checkbox2">
+                        <label for="checkbox2">Xbox</label>
+                      </div>
+                    </div>
+                    <div class="flex-item">
+                      <div class="checkbox-label">
+                        <input type="checkbox" id="checkbox3">
+                        <label for="checkbox3">Playstation</label>
+                      </div>
+                    </div>
+                    <div class="flex-item">
+                      <div class="checkbox-label">
+                        <input type="checkbox" id="checkbox4">
+                        <label for="checkbox4">Switch</label>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+            <div class="">
+                <h1>Type</h1>
+                <div class="flex-container">
+                    <div class="flex-item">
+                      <div class="checkbox-label">
+                        <input type="checkbox" id="checkbox1">
+                        <label for="checkbox1">Key</label>
+                      </div>
+                    </div>
+                    <div class="flex-item">
+                      <div class="checkbox-label">
+                        <input type="checkbox" id="checkbox2">
+                        <label for="checkbox2">Account</label>
+                      </div>
+                    </div>
+                    <div class="flex-item">
+                      <div class="checkbox-label">
+                        <input type="checkbox" id="checkbox3">
+                        <label for="checkbox3">Gift</label>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+            <div class="">
+                <h1>Version</h1>
+                <div class="flex-container">
+                    <div class="flex-item">
+                      <div class="checkbox-label">
+                        <input type="checkbox" id="checkbox1">
+                        <label for="checkbox1">Global</label>
+                      </div>
+                    </div>
+                    <div class="flex-item">
+                      <div class="checkbox-label">
+                        <input type="checkbox" id="checkbox2">
+                        <label for="checkbox2">Saudi Arabia</label>
+                      </div>
+                    </div>
+                    <div class="flex-item">
+                      <div class="checkbox-label">
+                        <input type="checkbox" id="checkbox3">
+                        <label for="checkbox3">Argentina</label>
+                      </div>
+                    </div>
+                    <div class="flex-item">
+                      <div class="checkbox-label">
+                        <input type="checkbox" id="checkbox4">
+                        <label for="checkbox4">USA</label>
+                      </div>
+                    </div>
+                  </div>
+            </div>
         </section>
         <section class="default text content flex-container-column">
+            <a href="placeholder" class="product-link round-border">
+                <img class="product-image" src="https://placehold.co/600x400/png" alt="Product image">
+                <div class="product-info">
+                    <h1 class="product-name text">name</h1>
+                <div class="product-details text">
+                    <h2>platform: </h2>
+                    <h2>Version: </h2>
+                    <h2>type: </h2>
+                    <h2>Release date: </h2>
+                </div>
+                </div>
+                <h1 class="product-price text">$70.00</h1>
+            </a>
+            <a href="placeholder" class="product-link round-border">
+                <img class="product-image" src="https://placehold.co/600x400/png" alt="Product image">
+                <div class="product-info">
+                    <h1 class="product-name text">name</h1>
+                <div class="product-details text">
+                    <h2>platform: </h2>
+                    <h2>Version: </h2>
+                    <h2>type: </h2>
+                    <h2>Release date: </h2>
+                </div>
+                </div>
+                <h1 class="product-price text">$70.00</h1>
+            </a>
+            <a href="placeholder" class="product-link round-border">
+                <img class="product-image" src="https://placehold.co/600x400/png" alt="Product image">
+                <div class="product-info">
+                    <h1 class="product-name text">name</h1>
+                <div class="product-details text">
+                    <h2>platform: </h2>
+                    <h2>Version: </h2>
+                    <h2>type: </h2>
+                    <h2>Release date: </h2>
+                </div>
+                </div>
+                <h1 class="product-price text">$70.00</h1>
+            </a>
+            <a href="placeholder" class="product-link round-border">
+                <img class="product-image" src="https://placehold.co/600x400/png" alt="Product image">
+                <div class="product-info">
+                    <h1 class="product-name text">name</h1>
+                <div class="product-details text">
+                    <h2>platform: </h2>
+                    <h2>Version: </h2>
+                    <h2>type: </h2>
+                    <h2>Release date: </h2>
+                </div>
+                </div>
+                <h1 class="product-price text">$70.00</h1>
+            </a>
             <a href="placeholder" class="product-link round-border">
                 <img class="product-image" src="https://placehold.co/600x400/png" alt="Product image">
                 <div class="product-info">
