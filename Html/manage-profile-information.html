@@ -63,39 +63,42 @@
         <section class="default general-box text flex-container-column content-box ">
             <h2 class="named-header">Edit Profile Information</h2>
             <div>
-                <form action="" method="post">
+                <form class="flex-container-column" action="" method="post">
                     <div class="flex-container-row">
                         <div class="content-box">
                             <h2>Username:</h2>
-                            <input type="text" name="uname" id="username" placeholder="Your username will be public" maxlength="25">
+                            <input class="text disabled-text-input" class="text disabled-text-input" type="text" name="uname" id="username" placeholder="Your username will be public" maxlength="25">
                         </div>
                         <div class="content-box">
                             <h2>Name:</h2>
-                            <input type="text" name="fname" id="fname" placeholder="First name" maxlength="15">
-                            <input type="text" name="lname" id="lname" placeholder="Last name" maxlength="15">
+                            <input class="text disabled-text-input" type="text" name="fname" id="fname" placeholder="First name" maxlength="15">
+                            <input class="text disabled-text-input" type="text" name="lname" id="lname" placeholder="Last name" maxlength="15">
                         </div>
                         <div class="content-box">
                             <h2>Email Address:</h2>
-                            <input type="email" name="email" id="email" placeholder="123@domain.com">
+                            <input class="text disabled-text-input" type="email" name="email" id="email" placeholder="123@domain.com">
                         </div>
                     </div>
                     <div class="flex-container-row">
                         <div class="content-box">
                             <h2>Phone number:</h2>
-                            <input type="number" name="phone-num" id="phone-num" placeholder="123-456-7890" maxlength="10">
+                            <input class="text disabled-text-input" type="number" name="phone-num" id="phone-num" placeholder="123-456-7890" maxlength="10">
                         </div>
                         <div class="content-box">
                             <h2>Country:</h2>
-                            <input type="country" name="country" id="country" placeholder="eg. USA">
+                            <input class="text disabled-text-input" type="country" name="country" id="country" placeholder="eg. USA">
                         </div>
                     </div>
                     <div class="content-box">
                         <h2>Password:</h2>
-                        <input type="password" name="password" id="password" placeholder="**********" maxlength="30">
+                        <input class="text disabled-text-input" type="password" name="password" id="password" placeholder="**********" maxlength="30">
                     </div>
                     <br>
-                    <button id="save" style="width: 150px; height: 30px; background-color: #2cc7ff;">Save</button>
-                    <button id="clear" style="width: 150px; height: 30px; background-color: #2cc7ff;">Clear</button>
+                    <div class="flex-container-space-between">
+                        <button id="save" class="buttons">Save</button>
+                        <button id="clear" class="buttons">Clear</button>
+                    </div>
+                    
                 </form>
             </div>
         </section>

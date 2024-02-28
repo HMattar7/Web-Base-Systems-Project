@@ -143,8 +143,10 @@ transform: scale(1.1);
   padding-left: 25px;
   padding-right: 25px;
   padding-bottom: 25px;
-  margin-left: 15px;
+  margin-bottom: 10px;
+  margin-left: 5px;
   word-wrap: break-word;
+  align-items: center;
   width: 50%;
   gap: 10px;
 }
@@ -179,7 +181,8 @@ transform: scale(1.1);
 }
 
 .general-box {
-  width: 900px;
+
+  width: fit-content;
   height: 550px;
   margin-top: 20px;
   margin-left: 25px;
@@ -278,4 +281,24 @@ transform: scale(1.1);
   height: 100%;
   font-size: 32px;
   padding: 10px 20px;
+}
+
+.disabled-text-input {
+  font-size: 18px; 
+  padding: 5px 10px;
+  margin-bottom: 2px;
+  border: 1px solid #ccc; 
+  border-radius: 5px; 
+  background-color: #f2f2f2; 
+  color: #333; 
+}
+
+.buttons{
+  text-align: center;
+  background-color: #2cc196;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 10px;
+  margin: 10px;
 }
