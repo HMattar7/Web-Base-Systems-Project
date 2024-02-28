@@ -292,3 +292,13 @@ transform: scale(1.1);
   background-color: #f2f2f2; 
   color: #333; 
 }
+
+.buttons{
+  text-align: center;
+  background-color: #2cc196;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 10px;
+  margin: 10px;
+}
