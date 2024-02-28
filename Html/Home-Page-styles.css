@@ -11,16 +11,18 @@
     text-transform:none;
   }
 
-  
+
 .background-color {
     background-color: #1F143D;
   }
   
+
   .flex-container-column {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    
   }
   
   .flex-container-space-between {
@@ -347,7 +349,7 @@
     padding: 25px;
     box-shadow: 0 0px 5px #000000;
     border-radius: 10px; 
-    margin: 5px;
+    margin: 40px;
     transition: 0.6s ease;
   }
 
@@ -430,3 +432,21 @@
     background-color: rgb(16, 0, 160);
     transform: scale(1.08);
 }
+
+.navigation a{
+  display: inline-block;
+  text-decoration: none;
+  color: rgb(55, 85, 255);
+  font-size: 1.7em;
+  font-weight: 500;
+  padding-left: 20px;
+  margin-top: 40px;
+  margin-bottom: 10px;
+  transition: 0.6s ease;
+}
+
+.navigation a:hover{
+  color: rgb(255, 255, 255);
+  transform: scale(1.08);
+}
+
