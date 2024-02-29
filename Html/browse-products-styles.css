@@ -136,8 +136,14 @@ select {
     color: white;
 }
 
-  select option {
+select option {
     border-radius: 5px; 
     background-color:#1F143D;
     color: white;
 }
+
+ul{
+    width: 100%;
+    list-style-type: none;
+}
+
