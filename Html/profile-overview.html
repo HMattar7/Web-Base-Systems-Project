@@ -62,40 +62,38 @@
         </section>
         <section class="default general-box text flex-container-column content-box ">
             <h2 class="named-header">Profile Overview</h2>
-            <div>
-                <form action="" method="post">
-                    <div class="flex-container-row">
-                        <div class="content-box">
-                            <h2>Username:</h2>
-                            <textarea name="username" id="username" cols="30" rows="2" disabled >placeholder</textarea>
-                        </div>
-                        <div class="content-box">
-                            <h2>Name:</h2>
-                            <textarea name="fname" id="fname" cols="30" rows="2" disabled >placeholder</textarea>
-                            <textarea name="lname" id="lname" cols="30" rows="2" disabled >placeholder</textarea>
-                        </div>
-                        <div class="content-box">
-                            <h2>Email Address:</h2>
-                            <textarea name="email" id="email" cols="30" rows="2" disabled >placeholder</textarea>
-                        </div>
-                    </div>
-                    <div class="flex-container-row">
-                        <div class="content-box">
-                            <h2>Phone number:</h2>
-                            <textarea name="phone-num" id="phone-num" cols="30" rows="2" disabled >placeholder</textarea>
-                        </div>
-                        <div class="content-box">
-                            <h2>Country:</h2>
-                            <textarea name="country" id="country" cols="30" rows="2" disabled >placeholder</textarea>
-                        </div>
+            <form class="flex-container-column" action="" method="post">
+                <div class="flex-container-row">
+                    <div class="content-box">
+                        <h2>Username:</h2>
+                        <input type="text" name="username" id="username"  disabled class="text disabled-text-input" placeholder="placeholder">
                     </div>
                     <div class="content-box">
-                        <h2>Password:</h2>
-                        <textarea name="password" id="password" cols="30" rows="2" disabled >placeholder</textarea>
+                        <h2>Name:</h2>
+                        <input type="text" class="text disabled-text-input" placeholder="placeholder"name="fname" id="fname"  disabled >
+                        <input type="text" class="text disabled-text-input" placeholder="placeholder"name="lname" id="lname"  disabled >
                     </div>
-                    <br>
-                </form>
-            </div>
+                    <div class="content-box">
+                        <h2>Email Address:</h2>
+                        <input type="text" class="text disabled-text-input" placeholder="placeholder"name="email" id="email"  disabled >
+                    </div>
+                </div>
+                <div class="flex-container-row">
+                    <div class="content-box">
+                        <h2>Phone number:</h2>
+                        <input type="text" class="text disabled-text-input" placeholder="placeholder"name="phone-num" id="phone-num"  disabled >
+                    </div>
+                    <div class="content-box">
+                        <h2>Country:</h2>
+                        <input type="text" class="text disabled-text-input" placeholder="placeholder"name="country" id="country"  disabled >
+                    </div>
+                </div>
+                <div class="content-box">
+                    <h2>Password:</h2>
+                    <input type="text" class="text disabled-text-input" placeholder="placeholder"name="password" id="password"  disabled >
+                </div>
+                <br>
+            </form>
         </section>
     </section>
 
