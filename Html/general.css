@@ -1,0 +1,33 @@
+body, button, input, a {
+  cursor: url('images/cursor.png'), auto;
+}
+
+button:hover, a:hover, input:hover {
+  cursor: url('images/pointer.png'), auto;
+}
+
+[style*="cursor: pointer;"], 
+button, 
+input[type="submit"],
+a,
+[class*="button"] 
+{
+  cursor: url('images/pointer.png'), auto !important;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
