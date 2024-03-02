@@ -58,6 +58,14 @@
     padding: 10px;
     margin: 2px;
     width: 95%;
+    background-color: #2cc196;
+    transition: 0.6s ease;
+}
+
+.product-link:hover {
+    box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
+    box-shadow: 0 5px 25px #1F143D;
+    transform: scale(1.01);
 }
 
   .product-image {
@@ -145,5 +153,30 @@ select option {
 ul{
     width: 100%;
     list-style-type: none;
+}
+
+
+.flex-container-row-wrap{
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.card{
+    background-color: #2cc196;
+    width: 21.25em;
+    padding: 25px;
+    box-shadow: 0 5px 25px #3b2674;;
+    border-radius: 10px; 
+    margin: 15px;
+    transition: 0.6s ease;
+}
+  
+
+   .card:hover {
+    border-color: #0400f8;
+    box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
+    box-shadow: 0 5px 25px #1F143D;
+    transform: scale(1.11);
 }
 
