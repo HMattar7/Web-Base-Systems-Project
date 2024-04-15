@@ -180,3 +180,18 @@ ul{
     transform: scale(1.11);
 }
 
+.allinments{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.allinments img {
+    padding: 10px;
+    filter: invert(100%);
+}
+
+.HideLayout {
+    display: none;
+}
