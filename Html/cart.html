@@ -6,6 +6,8 @@
     <title>Shopping cart</title>
     <link rel="icon" type="image/x-icon" href="images/Logo.svg">
     <link href="cart-styles.css" type="text/css" rel="stylesheet"/>
+    <link href="general.css" type="text/css" rel="stylesheet"/>
+
     <style>
         .modal {
             display: none; 
@@ -45,10 +47,15 @@
     </style>
 </head>
 <body class="flex-container-column background-color">
-<header class="default header">
+<header class="default header">   
     <section class="head flex-container-space-between">
+       
+       
+       
+       
+       
         <section class="header-icons">
-            <a href="profile.html" class="box round-border header-icons svg-contaior">
+            <a href="profile-overview.html" class="box round-border header-icons svg-contaior">
                 <img class="svg-image" src="images/circle.svg" alt="circle">
                 <img class="svg-image-overlay" src="images/person.svg" alt="person">
             </a>
@@ -63,9 +70,10 @@
                 <img class="svg-image" src="images/circle.svg" alt="circle">
                 <img class="svg-image-overlay" src="images/cart.svg" alt="cart">
             </a>
+       
         </section>
         <div class="vertical-divider"></div>
-        <a href="homepage.htm" style="text-decoration: none;" class="site-logo">
+        <a href="home.html" style="text-decoration: none;" class="site-logo">
             <img src="images/Logo.svg" alt="Logo">
             <h1 class="text">Games4Less</h1>
         </a>
@@ -335,7 +343,7 @@
         quantityContainers.forEach(attachQuantityEvents);
 
         updateTotalPrice();
-    });
+    });    
 </script>
 
 </body>
