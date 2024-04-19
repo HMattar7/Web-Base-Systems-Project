@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product page</title>
     <link rel="icon" type="image/x-icon" href="images/Logo.svg">
-    <link href="Product-Pages-styles.css" type="text/css" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="product-management.css" type="text/css" rel="stylesheet"/>
     <link href="general.css" type="text/css" rel="stylesheet"/>
 
 </head>
@@ -48,62 +49,81 @@
         </section>
         </section>
     </header>
-
-    
     <hr class="horizontal-divider">
-    <nav class="default flex-container-space-between navbar large-font">
-        <a href="placholder">Bestseller</a>
-        <a href="placholder">PC</a>
-        <a href="placholder">Playstation</a>
-        <a href="placholder">Xbox</a>
-        <a href="placholder">Nintendo</a>
-    </nav>
-    <hr class="horizontal-divider">
-    <section class="default flex-container-row text">
-        <section class="game-images">
-            <img class="main-image round-border" src="https://placehold.co/600x400/png" alt="main image"></img>
-            <div class="secondary-images">
-                <img class="secondary-image round-border" src="https://placehold.co/600x400/png" alt="secondary image"></img>
-                <img class="secondary-image round-border" src="https://placehold.co/600x400/png" alt="secondary image"></img>
-            </div>
-        </section>
-        <section class="default text">
-            <div class="game-name">
-                <h2 class="name-header">Game name</h2>
-            </div>
-            <div class="content-box bottom-margin">
-                <div class="flex-container-row">
-                    <h2 class="right-margin">Platform:</h2>
-                    <h2 >placholder</h2>
-                </div>
-                <div class="flex-container-row">
-                    <h2 class="right-margin">Version::</h2>
-                    <h2 >placholder</h2>
-                </div>
-                <div class="flex-container-row">
-                    <h2 class="right-margin">Type::</h2>
-                    <h2 >placholder</h2>
-                </div>
-                <div class="flex-container-row">
-                    <h2 class="right-margin">Release Date::</h2>
-                    <h2 >placholder</h2>
-                </div>
-            </div>
-            <div class=" paragraph  bottom-margin large-font ">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec luctus maurisLorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec luctus maurisLorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec luctus maurisLorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec luctus maurisLorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec luctus mauris. </p>
-            </div>
-        </section>
-        <section class="default price-box text flex-container-column content-box ">
-            <h2 class="price-header">$70.99</h2>
-            <div class="flex-container-column horizontal-margin buy-buttons">
-                <button type="button" class="cart-button horizontal-margin large-font ">Add to Cart</button>
-                <button type="button" class="Buy-Now-button horizontal-margin large-font">Buy Now</button>
-            </div>
-            <h2 class="stock-header">5 in stock</h2>
-            
+    <div class="container my-5">
+        <h1>List of Products</h1>
+            <a class='btn btn-primary' id ="id1" href='product-management-newProduct.html' role="button">New Product</a>
+            <br>
+            <table class="table">
+            <thead>
+                <tr>
+                    <th>product_id</th>
+                    <th>title</th>
+                    <th>paragraph</th>
+                    <th>category_id</th>
+                    <th>genre</th>
+                    <th>release_date</th>
+                    <th>platform</th>
+                    <th>price</th>
+                    <th>discount</th>
+                    <th>quantity</th>
+                    <th>image_url_1</th>
+                    <th>image_url_2</th>
+                    <th>image_url_3</th>
+                    <th>region</th>
+                    <th>type_of_product</th>
+                    <th colspan="2">Action</th>
+                </tr>
+            </thead>
+        
+            <tbody>
 
-        </section>
-    </section>
+                <tr>
+                    <td>product_id</td>
+                    <td>title</td>
+                    <td>paragraph</td>
+                    <td>category_id</td>
+                    <td>genre</td>
+                    <td>release_date</td>
+                    <td>platform</td>
+                    <td>price</td>
+                    <td>discount</td>
+                    <td>quantity</td>
+                    <td>image_url_1</td>
+                    <td>image_url_2</td>
+                    <td>image_url_3</td>
+                    <td>region</td>
+                    <td>type_of_product</td>
+                    <td>
+                        <a class='btn btn-primary btn-sm' href='product-management-editProduct.html'>Edit</a>
+                        <a class='btn btn-danger btn-sm' href=''>Delete</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>product_id</td>
+                    <td>title</td>
+                    <td>paragraph</td>
+                    <td>category_id</td>
+                    <td>genre</td>
+                    <td>release_date</td>
+                    <td>platform</td>
+                    <td>price</td>
+                    <td>discount</td>
+                    <td>quantity</td>
+                    <td>image_url_1</td>
+                    <td>image_url_2</td>
+                    <td>image_url_3</td>
+                    <td>region</td>
+                    <td>type_of_product</td>
+                    <td colspan="2">
+                        <a class='btn btn-primary btn-sm' href='product-management-editProduct.html'>Edit</a>
+                        <a class='btn btn-danger btn-sm' href=''>Delete</a>
+                    </td>
+                </tr>
+             </tbody>
+        
+            </table>
+        </div>  
     <hr class="horizontal-divider">
     <footer class="default flex-container-space-between text">
         <section class="footer">
