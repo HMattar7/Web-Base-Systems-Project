@@ -81,7 +81,7 @@
     height: 100%;
   }
   
-  .navbar a {
+  .navbar .dropdown {
     flex: 1;
     text-align: center;
     background-color: #2cc196;

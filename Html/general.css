@@ -30,4 +30,55 @@ a,
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+/* dropdown */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #25282b; /* Dark background color */
+  min-width: 200px;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  z-index: 1;
+  border-radius: 10px;
+  margin-top: 10px;
+  right: 0;
+  width: 100%;
+}
+
+.dropdown-content a {
+  color: #ffffff; /* White text color */
+  padding: 12px 16px;
+  text-decoration: underline;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Arial', sans-serif; /* Use Arial font */
+  font-size: 14px; /* Font size */
+}
+
+.dropdown-content a:hover {
+  background-color: #3f4551; /* Darker background color on hover */
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropbtn {
+  background-color: #2cc196; /* Green button background color */
+  color: #ffffff; /* White button text color */
+  padding: 12px 20px; /* Button padding */
+  border: none; /* No border */
+  cursor: pointer;
+  font-family: 'Arial', sans-serif; /* Use Arial font */
+  font-size: 14px; /* Font size */
+}
+
+.dropbtn:hover {
+  background-color: #4fa8e2; /* Darker blue on hover */
+}
 

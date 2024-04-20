@@ -8,54 +8,6 @@
     <link rel="icon" type="image/x-icon" href="images/Logo.svg">
     <link rel="stylesheet" href="Home-Page-styles.css">
     <link href="general.css" type="text/css" rel="stylesheet"/>
-
-    <style>
-        /* Styling for the dropdown menu */
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #25282b; /* Dark background color */
-            min-width: 200px;
-            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-            z-index: 1;
-        }
-
-        .dropdown-content a {
-            color: #ffffff; /* White text color */
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            font-family: 'Arial', sans-serif; /* Use Arial font */
-            font-size: 14px; /* Font size */
-        }
-
-        .dropdown-content a:hover {
-            background-color: #3f4551; /* Darker background color on hover */
-        }
-
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-
-        .dropbtn {
-            background-color: #2cc196; /* Green button background color */
-            color: #ffffff; /* White button text color */
-            padding: 12px 20px; /* Button padding */
-            border: none; /* No border */
-            cursor: pointer;
-            font-family: 'Arial', sans-serif; /* Use Arial font */
-            font-size: 14px; /* Font size */
-        }
-
-        .dropbtn:hover {
-            background-color: #4fa8e2; /* Darker blue on hover */
-        }
-    </style>
 </head>
 
 
@@ -83,18 +35,6 @@
         </section>
     <div class="vertical-divider"></div>
     <a href="home.html" style="text-decoration: none;" class="site-logo">
-    <div class="dropdown">
-        <button class="dropbtn">Shop by Category</button>
-        <div class="dropdown-content">
-            <a href="#">PC</a>
-            <a href="#">Playstation</a>
-            <a href="#">Xbox</a>
-            <a href="#">Nintendo</a>
-            <a href="#">Bestseller</a> 
-            <a href="#">Action games</a> 
-            <a href="#">Under 10 Riyals</a>
-        </div>
-    </div>
     <div class="vertical-divider"></div>
     <a href="homepage.htm" style="text-decoration: none;" class="site-logo">
         <img src="images/Logo.svg" alt="Logo">
@@ -121,11 +61,65 @@
 <body class="flex-container-column background-color">
 
     <nav class="default flex-container-space-between navbar large-font">
-        <a href="placholder">Bestseller</a>
-        <a href="placholder">PC</a>
-        <a href="placholder">Playstation</a>
-        <a href="placholder">Xbox</a>
-        <a href="placholder">Nintendo</a>
+        <div class="dropdown">
+            <button class="dropbtn">Bestseller</button>
+            <div class="dropdown-content">
+                <a href="#">PC</a>
+                <a href="#">Playstation</a>
+                <a href="#">Xbox</a>
+                <a href="#">Nintendo</a>
+                <a href="#">Indie Games</a>
+                <a href="#">RPGs</a>
+                <a href="#">FPS</a>
+                <a href="#">Strategy Games</a>
+                <a href="#">Simulation Games</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">PC</button>
+            <div class="dropdown-content">
+                <a href="#">Bestseller</a> 
+                <a href="#">Steam</a>
+                <a href="#">GOG</a>
+                <a href="#">Epic Games</a>
+                <a href="#">Top PC Games</a> 
+                <a href="#">Under 10 Riyals</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">Playstation</button>
+            <div class="dropdown-content">
+                <a href="#">Bestseller</a> 
+                <a href="#">Playstation exclusive games</a> 
+                <a href="#">Japanese games</a> 
+                <a href="#">Horror games</a> 
+                <a href="#">Previous generation</a> 
+                <a href="#">Under 10 Riyals</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">Xbox</button>
+            <div class="dropdown-content">
+                <a href="#">Bestseller</a>
+                <a href="#">Xbox One</a>
+                <a href="#">Xbox Series X</a>
+                <a href="#">Nintendo</a>
+                <a href="#">Xbox exclusives</a> 
+                <a href="#">Under 10 Riyals</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">Nintendo</button>
+            <div class="dropdown-content">
+                <a href="#">Bestseller</a> 
+                <a href="#">Nintendo Switch</a>
+                <a href="#">Nintendo Wii</a>
+                <a href="#">Nintendo DS</a>
+                <a href="#">Nintendo 3DS</a>
+                <a href="#">Classic games</a>
+                <a href="#">Under 10 Riyals</a>
+            </div>
+        </div>
     </nav>
     <hr class="horizontal-divider">
 
