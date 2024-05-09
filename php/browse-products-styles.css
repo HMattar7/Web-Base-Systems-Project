@@ -1,0 +1,197 @@
+.side-panel{
+    flex: 0 0 15%;
+    border-right: 1px solid #797979;
+    text-align: left;
+    align-items: flex-start;
+}
+
+.side-panel h1{
+    text-align: center;
+    font-size: 32px;
+    flex-basis: 0;
+    flex-grow: 1;
+    
+    
+}
+.side-panel button,input,label,option,select{
+    font-size: 28px;
+}
+.side-panel div{
+    width: 95%;
+    flex-basis: 0;
+    flex-grow: 1;
+    
+}
+
+.select-option{
+    max-height: 10%;
+    margin: 0;
+    padding: 0;
+}
+.page-name{
+    max-height: 5%;
+    margin: 0;
+    padding: 0;
+}
+
+
+.content-area{
+    display: flex;
+    width: 100%;
+}
+
+.content{
+    flex: 0 0 85%;
+    display: flex;
+    width: 100%;
+
+}
+
+
+.product-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+    color: #333;
+    border: 1px solid #797979;
+    padding: 10px;
+    margin: 2px;
+    width: 95%;
+    background-color: #2cc196;
+    transition: 0.6s ease;
+}
+
+.product-link:hover {
+    box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
+    box-shadow: 0 5px 25px #1F143D;
+    transform: scale(1.01);
+}
+
+  .product-image {
+    width: 150px;
+    height: 100%;
+    border-radius: 10px;
+    margin-right: 10px;
+}
+
+  .product-info {
+    display: flex;
+    flex-direction: column;
+}
+
+  .product-name {
+    margin-top: -5px;
+    text-align: left;
+    font-size: 32px;
+    margin-bottom: 5px;
+}
+
+  .product-details h2 {
+    text-align: left;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+  .product-price {
+    margin-left: auto;
+    font-size: 32px;
+}
+
+.text-button {
+    background: none;
+    border: none;
+    text-align: left;
+    align-items:flex-start;
+    padding: 1px;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+}
+.text-button:hover{
+    text-decoration: underline;
+}
+
+
+
+
+.price-text-area{
+    border-radius: 10px;
+    text-align: center;
+    margin: 5px;
+    width: 100%;
+}
+
+.checkbox-flex-item {
+    padding: 1px;
+
+}
+
+  .checkbox-label {
+    display: flex;
+    align-items: center;
+}
+
+.price-range{
+    max-height: 10%;
+}
+
+select {
+    font-size: 16px; 
+    border-radius: 5px; 
+    padding: 5px;
+    background-color:#1F143D;
+    color: white;
+}
+
+select option {
+    border-radius: 5px; 
+    background-color:#1F143D;
+    color: white;
+}
+
+ul{
+    width: 100%;
+    list-style-type: none;
+}
+
+
+.flex-container-row-wrap{
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.card{
+    background-color: #2cc196;
+    width: 21.25em;
+    padding: 25px;
+    box-shadow: 0 5px 25px #3b2674;;
+    border-radius: 10px; 
+    margin: 15px;
+    transition: 0.6s ease;
+}
+  
+
+   .card:hover {
+    border-color: #0400f8;
+    box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
+    box-shadow: 0 5px 25px #1F143D;
+    transform: scale(1.11);
+}
+
+.allinments{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.allinments img {
+    padding: 10px;
+    filter: invert(100%);
+}
+
+.HideLayout {
+    display: none;
+}
