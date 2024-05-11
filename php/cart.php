@@ -49,7 +49,7 @@
 </head>
 <body class="flex-container-column background-color">
     <?php include 'header.php'; ?>
-    </header>
+    
 <hr class="horizontal-divider">
 <?php include 'navbar.php'; ?>
 
