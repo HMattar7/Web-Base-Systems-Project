@@ -17,7 +17,7 @@
     <hr class="horizontal-divider">
     <div class="container my-5">
         <h1>List of Products</h1>
-            <a class='btn btn-primary' id ="id1" href='product-management-newProduct.html' role="button">New Product</a>
+            <a class='btn btn-primary' id ="id1" href='/php/product-management-newProduct.html' role="button">New Product</a>
             <br>
             <table class="table">
             <thead>
@@ -37,54 +37,59 @@
                     <th>image_url_3</th>
                     <th>region</th>
                     <th>type_of_product</th>
-                    <th colspan="2">Action</th>
+                    <th>Action</th>
                 </tr>
             </thead>
         
             <tbody>
 
-                <tr>
-                    <td>product_id</td>
-                    <td>title</td>
-                    <td>paragraph</td>
-                    <td>category_id</td>
-                    <td>genre</td>
-                    <td>release_date</td>
-                    <td>platform</td>
-                    <td>price</td>
-                    <td>discount</td>
-                    <td>quantity</td>
-                    <td>image_url_1</td>
-                    <td>image_url_2</td>
-                    <td>image_url_3</td>
-                    <td>region</td>
-                    <td>type_of_product</td>
-                    <td>
-                        <a class='btn btn-primary btn-sm' href='product-management-editProduct.html'>Edit</a>
-                        <a class='btn btn-danger btn-sm' href=''>Delete</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>product_id</td>
-                    <td>title</td>
-                    <td>paragraph</td>
-                    <td>category_id</td>
-                    <td>genre</td>
-                    <td>release_date</td>
-                    <td>platform</td>
-                    <td>price</td>
-                    <td>discount</td>
-                    <td>quantity</td>
-                    <td>image_url_1</td>
-                    <td>image_url_2</td>
-                    <td>image_url_3</td>
-                    <td>region</td>
-                    <td>type_of_product</td>
-                    <td colspan="2">
-                        <a class='btn btn-primary btn-sm' href='product-management-editProduct.html'>Edit</a>
-                        <a class='btn btn-danger btn-sm' href=''>Delete</a>
-                    </td>
-                </tr>
+            <?php
+        $servername = "localhost:3307";
+        $username = "root";
+        $password = "";
+        $database = "games4less";
+
+        //create connection
+        $connection = new mysqli($servername ,$username , $password, $database);
+
+        if($connection->connect_error){
+            die("connection failed: " . $connection->connect_error);
+        }
+
+        //write a query
+        $sql = "SELECT * FROM product";
+        $result = $connection->query($sql);
+
+        if(!$result){
+            die("Invalid query: " . $connection->error);
+        }
+
+        //read data of each row
+        while($row = $result->fetch_assoc()) { 
+            echo "
+        <tr>
+            <td>" . $row["product_id"] . "</td>
+            <td>" . $row["title"] . "</td>
+            <td>" . $row["paragraph"] . "</td>
+            <td>" . $row["category_id"] . "</td>
+            <td>" . $row["genre"] . "</td>
+            <td>" . $row["release_date"] . "</td>
+            <td>" . $row["platform"] . "</td>
+            <td>" . $row["price"] . "</td>
+            <td>" . $row["discount"] . "</td>
+            <td>" . $row["quantity"] . "</td>
+            <td>" . $row["image_url_1"] . "</td>
+            <td>" . $row["image_url_2"] . "</td>
+            <td>" . $row["image_url_3"] . "</td>
+            <td>" . $row["region"] . "</td>
+            <td>" . $row["type_of_product"] . "</td>
+            <td>
+                <a class='btn btn-primary btn-sm' href='/php/product-management-editProduct.php?product_id=$row[product_id]'>Edit</a>
+                <a class='btn btn-danger btn-sm' href='/php/product-management-deleteProduct.php?product_id=$row[product_id]'>Delete</a>
+            </td>
+        </tr>"; 
+        } 
+        ?>
              </tbody>
         
             </table>
