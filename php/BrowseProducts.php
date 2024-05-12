@@ -17,7 +17,6 @@
     <?php
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $formIdentifier = $_POST["formIdentifier"];
-            echo"". $formIdentifier ."";
             if ($formIdentifier === "Sort By") {
                 $_SESSION["sortOption"] = $_POST["sortOption"];
                 $sortOption = $_POST["sortOption"];
@@ -29,39 +28,46 @@
                 $FromOption = is_numeric($_POST["From"]) ? $_POST["From"] : "From";
                 $_SESSION["To"] = $_POST["To"];
                 $ToOption = is_numeric($_POST["To"]) ? $_POST["To"] : "To";
-                echo"". $FromOption ."". $ToOption ."";
             }elseif ($formIdentifier === "Platform") {
-                $_SESSION["platformOption"] = $_POST["platformOption"];
-                $platformOption = $_POST["platformOption"];
+                $_SESSION["platform"] = $_POST["platform"];
+                $platformOptions = $_POST["platform"];
             }elseif ($formIdentifier === "Type") {
-                $_SESSION["typeOption"] = $_POST["typeOption"];
-                $typeOption = $_POST["typeOption"];
+                $_SESSION["Type"] = $_POST["Type"];
+                $typeOptions = $_POST["Type"];
             }elseif ($formIdentifier === "Region") {
-                $_SESSION["regionOption"] = $_POST["regionOption"];
-                $regionOption = $_POST["regionOption"];
+                $_SESSION["Region"] = $_POST["Region"];
+                $regionOptions = $_POST["Region"];
             }
             else {
                 $sortOption = isset($_SESSION['sortOption']) ? $_SESSION["sortOption"] : "alphabetical";
                 $genraOption = isset($_SESSION["genraOption"]) ? $_SESSION["genraOption"] : "All";
                 $FromOption = isset($_SESSION["From"]) ? $_SESSION["From"] : "From";
                 $ToOption = isset($_SESSION["To"]) ? $_SESSION["To"] : "To";
-                $platformOption = isset($_SESSION["platformOption"]) ? $_SESSION["platformOption"] : "All";
-                $typeOption = isset($_SESSION["typeOption"]) ? $_SESSION["typeOption"] : "All";
-                $regionOption = isset($_SESSION["regionOption"]) ? $_SESSION["regionOption"] : "All";
+                $platformOptions = isset($_SESSION["platform"]) ? $_SESSION["platform"] : "";
+                $typeOptions = isset($_SESSION["Type"]) ? $_SESSION["Type"] : "";
+                $regionOptions = isset($_SESSION["Region"]) ? $_SESSION["Region"] : "";
             } 
         }
         $sortOption = isset($_SESSION['sortOption']) ? $_SESSION["sortOption"] : "alphabetical";
         $genraOption = isset($_SESSION["genraOption"]) ? $_SESSION["genraOption"] : "All";
         $FromOption = isset($_SESSION["From"]) ? $_SESSION["From"] : "From";
         $ToOption = isset($_SESSION["To"]) ? $_SESSION["To"] : "To";
-        $platformOption = isset($_SESSION["platformOption"]) ? $_SESSION["platformOption"] : "All";
-        $typeOption = isset($_SESSION["typeOption"]) ? $_SESSION["typeOption"] : "All";
-        $regionOption = isset($_SESSION["regionOption"]) ? $_SESSION["regionOption"] : "All";
+        $platformOptions = isset($_SESSION["platform"]) ? $_SESSION["platform"] : "";
+        $typeOptions = isset($_SESSION["Type"]) ? $_SESSION["Type"] : "";
+        $regionOptions = isset($_SESSION["Region"]) ? $_SESSION["Region"] : "";
         
     ?>
 
     <hr class="horizontal-divider">
     <?php include 'navbar.php'; ?>
+    <?php
+            if(isset($_GET['page-nr'])){
+                $page = $_GET['page-nr'];
+            }
+            else{
+                $page = 1;
+            }
+    ?>
     <section class="content-area">
         
         <section class=" text side-panel side-flex-container-column">
@@ -166,18 +172,39 @@
                 $select_query = "SELECT DISTINCT `platform` FROM `product`";
                 $result_query = mysqli_query($db_link, $select_query);
                 while ($row = mysqli_fetch_assoc($result_query)) {
-                    if ($row["platform"] != "") {
-                        echo "<div class='flex-container'>
-                        <div class='flex-item'>
-                        <div class='checkbox-label'>
-                            <input type='checkbox' name='platform' value='" . $row['platform'] . "' id='checkbox1'>
-                            <label class='checkbox_label'>" . $row['platform'] . "</label>
-                        </div>";
+                    if (!empty($platformOptions) && in_array($row['platform'], $platformOptions)) {
+                        if ($row["platform"] != "") {
+                            echo "<div class='flex-container'>
+                            <div class='flex-item'>
+                            <div class='checkbox-label'>
+                                <input type='checkbox' name='platform[]' value='" . $row['platform'] . "' id='checkbox1' checked >
+                                <label class='checkbox_label'>" . $row['platform'] . "</label>
+                            </div>";
+                        }
+                    }else{
+                        if ($row["platform"] != "") {
+                            echo "<div class='flex-container'>
+                            <div class='flex-item'>
+                            <div class='checkbox-label'>
+                                <input type='checkbox' name='platform[]' value='" . $row['platform'] . "' id='checkbox1'>
+                                <label class='checkbox_label'>" . $row['platform'] . "</label>
+                            </div>";
+                        }
                     }
-
                 }
                 mysqli_close($db_link);
+                if (isset($platformOptions) && is_array($platformOptions)) {
+                    if (count($platformOptions) == 1) {
+                        $platform_query ="AND `platform` = '$platformOptions[0]'";
+                    }else if (count($platformOptions) > 1) {
+                        $platform_query = "AND `platform` IN ('" . implode("','", $platformOptions) . "')";
+                    }
+                }else{
+                    $platform_query = "";
+                }
+                
                 ?>
+                <input type="submit" class="submit-button" value="submit" >
                 <input type="hidden" name="formIdentifier" value="Platform">        
                 </form>
 
@@ -200,15 +227,38 @@
                     $select_query = "SELECT DISTINCT `type_of_product` FROM `product`";
                     $result_query = mysqli_query($db_link, $select_query);
                     while ($row = mysqli_fetch_assoc($result_query)) {
-                        echo "<div class='flex-container'>
+                        if (!empty($typeOptions) && in_array($row['type_of_product'], $typeOptions)) {
+                            if ($row["type_of_product"] != "") {
+                                echo "<div class='flex-container'>
                                 <div class='flex-item'>
                                 <div class='checkbox-label'>
-                                    <input type='checkbox' name='Type' value='" . $row['type_of_product'] . "' id='checkbox2'>
+                                    <input type='checkbox' name='Type[]' value='" . $row['type_of_product'] . "' id='checkbox2' checked >
                                     <label class='checkbox_label'>" . $row['type_of_product'] . "</label>
                                 </div>";
+                            }
+                        }else{
+                            if ($row["type_of_product"] != "") {
+                                echo "<div class='flex-container'>
+                                <div class='flex-item'>
+                                <div class='checkbox-label'>
+                                    <input type='checkbox' name='Type[]' value='" . $row['type_of_product'] . "' id='checkbox2'>
+                                    <label class='checkbox_label'>" . $row['type_of_product'] . "</label>
+                                </div>";
+                            }
+                        }
                     }
                     mysqli_close($db_link);
+                    if (isset($typeOptions) && is_array($typeOptions)) {
+                        if (count($typeOptions) == 1) {
+                            $type_query ="AND `type_of_product` = '$typeOptions[0]'";
+                        }else if (count($typeOptions) > 1) {
+                            $type_query = "AND `type_of_product` IN ('" . implode("','", $typeOptions) . "')";
+                        }
+                    }else{
+                        $type_query = "";
+                    }
                     ?>
+                    <input type="submit" class="submit-button" value="submit" >
                     <input type="hidden" name="formIdentifier" value="Type">
                     </form>   
                     <!-- <div class="flex-item">
@@ -231,15 +281,38 @@
                     $select_query = "SELECT DISTINCT `region` FROM `product`";
                     $result_query = mysqli_query($db_link, $select_query);
                     while ($row = mysqli_fetch_assoc($result_query)) {
-                        echo "<div class='flex-container'>
+                        if (!empty($regionOptions) && in_array($row['region'], $regionOptions)) {
+                            if ($row["region"] != "") {
+                                echo "<div class='flex-container'>
                                 <div class='flex-item'>
                                 <div class='checkbox-label'>
-                                    <input type='checkbox' name='Region' value='" . $row['region'] . "' id='checkbox3'>
+                                    <input type='checkbox' name='Region[]' value='" . $row['region'] . "' id='checkbox3' checked >
                                     <label class='checkbox_label'>" . $row['region'] . "</label>
                                 </div>";
+                            }
+                        }else{
+                            if ($row["region"] != "") {
+                                echo "<div class='flex-container'>
+                                <div class='flex-item'>
+                                <div class='checkbox-label'>
+                                    <input type='checkbox' name='Region[]' value='" . $row['region'] . "' id='checkbox3'>
+                                    <label class='checkbox_label'>" . $row['region'] . "</label>
+                                </div>";
+                            }
+                        }
                     }
                     mysqli_close($db_link);
+                    if (isset($regionOptions) && is_array($regionOptions)) {
+                        if (count($regionOptions) == 1) {
+                            $region_query ="AND `region` = '$regionOptions[0]'";
+                        }else if (count($regionOptions) > 1) {
+                            $region_query = "AND `region` IN ('" . implode("','", $regionOptions) . "')";
+                        }
+                    }else{
+                        $region_query = "";
+                    }
                     ?>
+                    <input type="submit" class="submit-button" value="submit" >
                     <input type="hidden" name="formIdentifier" value="Region">
                     </form>   
                     <!-- <div class="flex-item">
@@ -251,14 +324,7 @@
                   </div>
             </div>
         </section>
-        <?php
-         if(isset($_GET['page-nr'])){
-            $page = $_GET['page-nr'];
-         }
-         else{
-            $page = 1;
-         }
-        ?>
+        
         <section class="default text content ">
             <ul class="" id="layoutcards">
                 <?php
@@ -268,11 +334,9 @@
                 mysqli_select_db($db_link,"games4less");
                 //query for selecting data
                 $genra_query = ($genraOption == "All") ? null : "AND `genre` = '$genraOption'";
-                // $sort_query = ($genraOption == "All") ? null : "AND `genre` = '$genraOption'";
                 //query ends
                 $lower_limit = abs($page-1) * 8;
-                $select_query = "SELECT * FROM `product` WHERE 1=1 $genra_query $PriceRange_query $sort_query LIMIT $lower_limit, 8";
-                echo "$select_query";
+                $select_query = "SELECT * FROM `product` WHERE 1=1 $genra_query $platform_query $type_query $region_query $PriceRange_query $sort_query LIMIT $lower_limit, 8";
                 $result_query = mysqli_query($db_link, $select_query);
                 while ($row = mysqli_fetch_array($result_query)) {
                     $product_id = $row['product_id'];
@@ -296,7 +360,7 @@
 
                     echo "
                         <li class=''>
-                            <a href='placeholder' class='product-link round-border'>
+                            <a href='ProductPages.php?id=$product_id' class='product-link round-border'>
                                 <img class='product-image' src='$imagePath' alt='$title'>
                                 <div class='product-info'>
                                     <h1 class='product-name text'>$title</h1>
@@ -313,88 +377,58 @@
                         ";
                 }
                 mysqli_close($db_link);
-                ?>
-                <!-- <li class="">
-                    <a href="placeholder" class="product-link round-border">
-                        <img class="product-image" src="https://placehold.co/600x400/png" alt="Product image">
-                        <div class="product-info">
-                            <h1 class="product-name text">name</h1>
-                        <div class="product-details text">
-                            <h2>platform: </h2>
-                            <h2>Version: </h2>
-                            <h2>type: </h2>
-                            <h2>Release date: </h2>
-                        </div>
-                        </div>
-                        <h1 class="product-price text">$70.00</h1>
-                    </a>
-                </li> -->
-                
+                ?> 
             </ul>
             <ul class="flex-container-row-wrap HideLayout" id="layoutgrid">
-            <?php
-                $sql_name = "root";
-                $sql_pass = "";
-                $db_link = mysqli_connect("localhost:3306",$sql_name, $sql_pass);
-                mysqli_select_db($db_link,"games4less");
-                $lower_limit = abs($page-1) * 16;
-                $select_query = "SELECT * FROM `product` WHERE `genre` = '$genraOption' ORDER BY $sortOption LIMIT $lower_limit, 16";
-                $result_query = mysqli_query($db_link, $select_query);
-                while ($row = mysqli_fetch_array($result_query)) {
-                    $product_id = $row['product_id'];
-                    $category_id = $row['category_id'];
-                    $title = $row['title'];
-                    $paragraph = $row['paragraph'];
-                    $genre = $row['genre'];
-                    $release_date = $row['release_date'];
-                    $platform = $row['platform'];
-                    $price = $row['price'];
-                    $discount = $row['discount'];
-                    $quantity = $row['quantity'];
-                    $image_url_1 = $row['image_url_1'];
-                    $image_url_2 = $row['image_url_2'];
-                    $image_url_3 = $row['image_url_3'];
-                    $region = $row['region'];
-                    $type_of_product = $row['type_of_product'];
+                <?php
+                    $sql_name = "root";
+                    $sql_pass = "";
+                    $db_link = mysqli_connect("localhost:3306",$sql_name, $sql_pass);
+                    mysqli_select_db($db_link,"games4less");
+                    $lower_limit = ($page - 1) * 16;
+                    $select_query = "SELECT * FROM `product` WHERE 1=1 $genra_query $platform_query $type_query $region_query $PriceRange_query $sort_query LIMIT $lower_limit, 16";
+                    $result_query = mysqli_query($db_link, $select_query);
+                    $url = "ProductPages.php";
+                    while ($row = mysqli_fetch_array($result_query)) {
+                        $product_id = $row['product_id'];
+                        $category_id = $row['category_id'];
+                        $title = $row['title'];
+                        $paragraph = $row['paragraph'];
+                        $genre = $row['genre'];
+                        $release_date = $row['release_date'];
+                        $platform = $row['platform'];
+                        $price = $row['price'];
+                        $discount = $row['discount'];
+                        $quantity = $row['quantity'];
+                        $image_url_1 = $row['image_url_1'];
+                        $image_url_2 = $row['image_url_2'];
+                        $image_url_3 = $row['image_url_3'];
+                        $region = $row['region'];
+                        $type_of_product = $row['type_of_product'];
 
-                    $imagePath = './games_images/' . $image_url_1 . '.avif';
-                    if (!file_exists('./games_images/' . $image_url_1 . '.avif')) { $imagePath ="https://placehold.co/600x400/png"; }
-                    
-                    echo "
-                        <li class=''>
-                        <div class='card' style=''>
-                            <div class='icon'>
-                                <h3>$title</h3>
-                                <a href=''><img class='secondary-image round-border' src='$imagePath' alt='$title'></img></a>
+                        $imagePath = './games_images/' . $image_url_1 . '.avif';
+                        if (!file_exists('./games_images/' . $image_url_1 . '.avif')) { $imagePath ="https://placehold.co/600x400/png"; }
+                        
+                        echo "
+                            <li class='' onclick=\"sendGetRequest('$url', '$product_id')\">
+                            <div class='card' style=''>
+                                <div class='icon'>
+                                    <h3>$title</h3>
+                                    <img class='secondary-image round-border' src='$imagePath' alt='$title'></img>
+                                </div>
+                                <div class='product-details text'>
+                                    <h2>Platform:$platform </h2>
+                                    <h2> Version:$region </h2>
+                                    <h2> Type:$type_of_product </h2>
+                                    <h2> Release date:$release_date</h2>
+                                </div>
+                                <h1 class='product-price text'>$$price</h1>
                             </div>
-                            <div class='product-details text flex-container-row-wrap'>
-                                <h2>Platform:$platform </h2>
-                                <h2> Version:$region </h2>
-                                <h2> Type:$type_of_product </h2>
-                                <h2> Release date:$release_date</h2>
-                            </div>
-                            <h1 class='product-price text'>$price</h1>
-                        </div>
-                    </li>
-                        ";
-                }
-                mysqli_close($db_link);
+                        </li>
+                            ";
+                    }
+                    mysqli_close($db_link);
                 ?>
-                <!-- <li class=''>
-                    <div class='card' style=''>
-                        <div class='icon'>
-                            <h3>Game Title</h3>
-                            <a href=''><img class='secondary-image round-border' src='https://placehold.co/600x400/png' alt='secondary image' style='margin-top: 8%; margin-bottom: 8%;'></img></a>
-                        </div>
-                        <div class='product-details text flex-container-row-wrap'>
-                            <h2>platform- </h2>
-                            <h2>Version- </h2>
-                            <h2>type- </h2>
-                            <h2>Release date </h2>
-                        </div>
-                        <h1 class='product-price text'>$70.00</h1>
-                    </div>
-                </li> -->
             </ul>
         </section>
     </section>
@@ -409,7 +443,7 @@
             ?>
             <?php 
             if(isset($_GET['page-nr'])){
-                if($_GET['page-nr'] >= 10){
+                if($_GET['page-nr'] >= 100){
                     ?> <a class="pagination-item" >Next</a> <?php
                 }else{
                     ?> <a href="?page-nr=<?php echo $_GET['page-nr'] + 1 ?>" class="pagination-item">Next</a> <?php
@@ -418,6 +452,7 @@
                 ?> <a href="?page-nr=2">Next</a> <?php
             }
             ?>
+            
         </div>
     </section>
     <hr class="horizontal-divider">

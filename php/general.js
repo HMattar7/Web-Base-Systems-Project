@@ -57,3 +57,7 @@ function validateRange() {
     toInput.value = "To";
   }
 }
+
+function sendGetRequest(url, value) {
+  window.location.href = url +"?id=" + encodeURIComponent(value);
+}
