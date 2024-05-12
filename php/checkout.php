@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping cart</title>
     
-    <link href="cart-styles.css" type="text/css" rel="stylesheet"/>
+    <link href="checkout-styles.css" type="text/css" rel="stylesheet"/>
     <link href="Product-Pages-styles.css" type="text/css" rel="stylesheet"/>
     <?php include 'head.php'; ?>
 
@@ -49,12 +49,90 @@
 </head>
 <body class="flex-container-column background-color">
     <?php include 'header.php'; ?>
-    
+    </header>
 <hr class="horizontal-divider">
 <?php include 'navbar.php'; ?>
 
 
 <div class="small-container cart-page">
+
+
+
+<style>
+    .payment-options {
+        margin-bottom: 20px;
+    }
+
+    .payment-method {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .payment-method label {
+        margin-left: 10px;
+        font-size: 16px; /* Adjust as needed */
+        font-weight: bold;
+    }
+</style>
+
+<div class="payment-container">
+    <div class="payment-options">
+        <h2>Select Payment Method:</h2>
+        <div class="payment-method">
+            <input type="radio" name="payment_method" id="mastercard" value="mastercard">
+            <label for="mastercard"><img src="images/mastercard.svg" alt="Mastercard" style="width: 40px; height: 40px;"></label>
+            <label for="mastercard" class="text">Mastercard</label>
+        </div>
+        <div class="payment-method">
+            <input type="radio" name="payment_method" id="paypal" value="paypal">
+            <label for="paypal"><img src="images/paypal.svg" alt="PayPal" style="width: 40px; height: 40px;"></label>
+            <label for="paypal" class="text">PayPal</label>
+        </div>
+        <div class="payment-method">
+            <input type="radio" name="payment_method" id="mada" value="mada">
+            <label for="mada"><img src="images/mada.svg" alt="Mada" style="width: 40px; height: 40px;"></label>
+            <label for="mada" class="text">Mada</label>
+        </div>
+    </div>
+
+    <div id="mastercardFields" class="payment-fields">
+        <!-- Fields for Mastercard -->
+        <label for="card_number" class="text">Card Number:</label>
+        <input type="text" name="card_number" id="card_number_mastercard" placeholder="1234 5678 9012 3456"><br>
+        <label for="expiry_date" class="text">Expiry Date:</label>
+        <input type="text" name="expiry_date" id="expiry_date_mastercard" placeholder="MM/YY"><br>
+        <label for="cvv" class="text">CVV:</label>
+        <input type="text" name="cvv" id="cvv_mastercard" placeholder="123">
+    </div>
+
+    <div id="paypalFields" class="payment-fields">
+        <!-- Fields for PayPal -->
+        <label for="email" class="text">Email:</label>
+        <input type="email" name="email" id="email_paypal" placeholder="example@example.com"><br>
+        <label for="password" class="text">Password:</label>
+        <input type="password" name="password" id="password_paypal" placeholder="********">
+    </div>
+
+    <div id="madaFields" class="payment-fields">
+        <!-- Fields for Mada -->
+        <label for="mada_card_number" class="text">Card Number:</label>
+        <input type="text" name="mada_card_number" id="mada_card_number" placeholder="1234 5678 9012 3456"><br>
+        <label for="mada_expiry_date" class="text">Expiry Date:</label>
+        <input type="text" name="mada_expiry_date" id="mada_expiry_date" placeholder="MM/YY"><br>
+        <label for="mada_cvv" class="text">CVV:</label>
+        <input type="text" name="mada_cvv" id="mada_cvv" placeholder="123">
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
 
     <table class="item-table">
         <caption>Your Cart</caption>
@@ -164,7 +242,9 @@
             </tr>
             <tr>
                 <td colspan="2" class="checkout-button">
-                    <button class="checkout-button" type="button">Checkout</button>
+                <button onclick="window.location.href='checkout.php'" class="checkout-button" type="button">Checkout</button>
+
+
                 </td>
             </tr>
         </table>
@@ -290,6 +370,87 @@
         updateTotalPrice();
     });    
 </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const paymentOptions = document.querySelectorAll('input[name="payment_method"]');
+        const paymentFields = document.querySelectorAll('.payment-fields');
 
+        paymentOptions.forEach(option => {
+            option.addEventListener('change', () => {
+                const selectedOption = document.querySelector('input[name="payment_method"]:checked').value;
+                paymentFields.forEach(field => {
+                    field.classList.remove('visible');
+                });
+                document.getElementById(selectedOption + 'Fields').classList.add('visible');
+            });
+        });
+    });
+</script>
+
+<script>
+
+document.addEventListener('DOMContentLoaded', function() {
+    const paymentOptions = document.querySelectorAll('input[name="payment_method"]');
+    const paymentFields = document.querySelectorAll('.payment-fields');
+
+    paymentOptions.forEach(option => {
+        option.addEventListener('change', () => {
+            const selectedOption = document.querySelector('input[name="payment_method"]:checked').value;
+            paymentFields.forEach(field => {
+                field.classList.remove('visible');
+            });
+            document.getElementById(selectedOption + 'Fields').classList.add('visible');
+        });
+    });
+
+    // Add your JavaScript code for form validation and checkout button handling here
+    document.getElementById('checkoutBtn').addEventListener('click', function(event) {
+        var selectedPaymentMethod = document.querySelector('input[name="payment_method"]:checked').value;
+        var fieldsValid = true;
+        
+        switch(selectedPaymentMethod) {
+            case 'mastercard':
+                fieldsValid = validateMastercardFields();
+                break;
+            case 'paypal':
+                fieldsValid = validatePaypalFields();
+                break;
+            case 'mada':
+                fieldsValid = validateMadaFields();
+                break;
+        }
+        
+        if (!fieldsValid) {
+            event.preventDefault(); // Prevent form submission if fields are not valid
+            alert('Please fill in all required fields.');
+        }
+    });
+
+    function validateMastercardFields() {
+        var cardNumber = document.getElementById('card_number_mastercard').value;
+        var expiryDate = document.getElementById('expiry_date_mastercard').value;
+        var cvv = document.getElementById('cvv_mastercard').value;
+        
+        return cardNumber && expiryDate && cvv;
+    }
+
+    function validatePaypalFields() {
+        var email = document.getElementById('email_paypal').value;
+        var password = document.getElementById('password_paypal').value;
+        
+        return email && password;
+    }
+
+    function validateMadaFields() {
+        var madaCardNumber = document.getElementById('mada_card_number').value;
+        var madaExpiryDate = document.getElementById('mada_expiry_date').value;
+        var madaCvv = document.getElementById('mada_cvv').value;
+        
+        return madaCardNumber && madaExpiryDate && madaCvv;
+    }
+});
+
+
+</script>
 </body>
 </html>

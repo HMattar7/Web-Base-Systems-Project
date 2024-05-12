@@ -1,3 +1,6 @@
+body {
+    overflow-x: hidden;
+}
 .side-panel{
     flex: 0 0 15%;
     border-right: 1px solid #797979;
@@ -6,7 +9,6 @@
 }
 
 .side-panel h1{
-    text-align: center;
     font-size: 32px;
     flex-basis: 0;
     flex-grow: 1;
@@ -58,6 +60,7 @@
     padding: 10px;
     margin: 2px;
     width: 95%;
+    height: 90%;
     background-color: #2cc196;
     transition: 0.6s ease;
 }
@@ -130,6 +133,7 @@
   .checkbox-label {
     display: flex;
     align-items: center;
+    width: 100%;
 }
 
 .price-range{
@@ -161,14 +165,37 @@ ul{
     align-items: flex-start;
     flex-wrap: wrap;
 }
+#layoutcards li {
+    height: 226px;
+    width: 100%;
+    max-width: 100%;
+    max-height: 226px;
+    min-width: 100%;
+    min-height: 226px;
+    transform: translateX(-20px);
+}
+#layoutgrid li {
+    height: 496px;
+    width: 356px;
+    max-width: 356px;
+    max-height: 496px;
+    min-width: 356px;
+    min-height: 496px;
+    margin-bottom: 10px;
+}
+
+.background-layout{
+    background-color: #d33e69;
+    border-radius: 10px;
+}
 
 .card{
     background-color: #2cc196;
     width: 21.25em;
-    padding: 25px;
+    height: 90%;
+    padding: 20px;
     box-shadow: 0 5px 25px #3b2674;;
     border-radius: 10px; 
-    margin: 15px;
     transition: 0.6s ease;
 }
   
@@ -183,8 +210,8 @@ ul{
 .allinments{
     display: flex;
     flex-direction: row;
-    align-items: center;
     justify-content: center;
+    
 }
 
 .allinments img {
@@ -194,4 +221,45 @@ ul{
 
 .HideLayout {
     display: none;
+}
+
+.pagination {
+    border-radius: 10px;
+    background-color: #2cc196;
+    padding: 25px;
+    display: inline-block;
+}
+  
+.pagination a {
+    border: black solid 1px;
+    border-radius: 10px;
+    font-size: 26px;
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+.pagination a:hover {
+    background-color: #ddd;
+    color: black;
+    border-radius: 10px;
+}
+.checkbox_label {
+    width: 100%;
+    white-space: nowrap;
+    margin: 1px;
+}
+
+.side-flex-container-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: fit-content;
+  }
+
+.submit-button {
+    background-color: #2cc196;
+    border-radius: 10px;
+    transform: translateX(75%);
+
 }

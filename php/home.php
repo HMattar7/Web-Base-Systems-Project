@@ -12,12 +12,8 @@
 
 
 <?php include 'header.php'; ?>
-<nav class="navigation navbar">
-        <a href="Browse products.html">Browse</a> 
-        <a href="#Categories">Categories</a>
-        <a href="#footer">Contact</a>  
-        </nav>
-</header>
+
+
 
 <hr class="horizontal-divider">
 

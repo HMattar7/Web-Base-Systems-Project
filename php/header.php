@@ -1,4 +1,5 @@
 <header class="default header">
+    <?php session_start(); ?>
         <section class="head flex-container-space-between">
             <section class="header-icons">
                 <a href="profile.html" class="box round-border header-icons svg-contaior">
@@ -36,4 +37,4 @@
             </form>
         </section>
         </section>
-    
+</header>
