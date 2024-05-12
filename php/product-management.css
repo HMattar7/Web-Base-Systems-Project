@@ -329,3 +329,28 @@ h1{
 }
 
 
+#t1{
+  padding: 1cap;
+  border: #000000;
+}
+
+td{
+  display: list-item;
+  list-style: none;
+}
+
+tr{
+  display: list-item;
+  list-style: none;
+}
+
+th{
+  
+  margin-top: 1cap;
+  display: list-item;
+  list-style: none;
+}
+
+#tdA{
+  display: flexbox;
+}

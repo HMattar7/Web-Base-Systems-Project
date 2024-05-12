@@ -1,3 +1,94 @@
+<?php
+$servername = "localhost:3307";
+$username = "root";
+$password = "";
+$database = "games4less";
+
+//create connection
+$connection = new mysqli($servername ,$username , $password, $database);
+
+if($connection->connect_error){
+    die("connection failed: " . $connection->connect_error);
+}
+
+
+
+$product_id="";
+$title="";
+$paragraph="";
+$category_id="";
+$genre="";
+$release_date="";
+$platform="";
+$price="";
+$discount="";
+$quantity="";
+$image_url_1="";
+$image_url_2="";
+$image_url_3="";
+$region="";
+$type_of_product="";
+
+$errorMessage = "";
+$successMessage = "";
+
+if( $_SERVER[ 'REQUEST_METHOD' ] == 'POST' ) {
+
+    $title=$_POST["title"]; 
+    $paragraph=$_POST["paragraph"]; 
+    $category_id=$_POST["category_id"]; 
+    $genre=$_POST["genre"]; 
+    $release_date=$_POST["release_date"]; 
+    $platform=$_POST["platform"]; 
+    $price=$_POST["price"]; 
+    $discount=$_POST["discount"]; 
+    $quantity=$_POST["quantity"]; 
+    $image_url_1=$_POST["image_url_1"]; 
+    $image_url_2=$_POST["image_url_2"]; 
+    $image_url_3=$_POST["image_url_3"]; 
+    $region=$_POST["region"]; 
+    $type_of_product=$_POST["type_of_product"]; 
+
+
+    do{
+        if ( empty($title) || empty($image_url_1) || empty($category_id) || empty($price) || empty($quantity) ){
+        $errorMessage = "Title,  category_id, image_url_1, price and quantity fields are required";
+        break;
+        }
+
+        // add new client to database
+        $sql = "INSERT INTO product (title, paragraph, category_id, genre, release_date, platform, price, discount, quantity, image_url_1, image_url_2, image_url_3, region, type_of_product)" . "VALUES ('$title', '$paragraph', '$category_id', '$genre', '$release_date', '$platform', '$price', '$discount', '$quantity', '$image_url_1', '$image_url_2', '$image_url_3', '$region', '$type_of_product')";
+        $result = $connection->query($sql);
+
+        if (!$result){
+            $errorMessage = "Invalid query: " . $connection->error;
+            break;
+        }
+
+        $product_id="";
+        $title="";
+        $paragraph="";
+        $category_id="";
+        $genre="";
+        $release_date="";
+        $platform="";
+        $price="";
+        $discount="";
+        $quantity="";
+        $image_url_1="";
+        $image_url_2="";
+        $image_url_3="";
+        $region="";
+        $type_of_product="";
+
+        $successMessage = "Client added correctly";
+
+        header("location: /php/product-management.php");
+        exit;
+
+    }while (false);
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,20 +106,26 @@
     <div class="container my-5">
         <h2>New Product</h2>
 
+        <?php
+            if(!empty($errorMessage)){
+                echo 
+                "
+                <div class='alert alert-warning alert-dismissible fade show' role='alert'>
+                    <strong>$errorMessage</strong>
+                    <button type='button' class='btn-close' data-bs-dismiss='alert' aria-lable='close'></button>
+                </div>
+                ";
+            }
+        ?>
+
 
         <form method="post">
 
-            <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">product_id</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" name="product_id" value="">
-                </div>
-            </div>
              
             <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">title</label>
+                <label class="col-sm-3 col-form-label">title<span style="color: red">*</span></label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" name="Lname" value="">
+                    <input type="text" class="form-control" name="title" value="">
                 </div>
             </div>
 
@@ -40,56 +137,56 @@
             </div>
 
             <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">category_id</label>
+                <label class="col-sm-3 col-form-label">category_id<span style="color: red">*</span></label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" name="phone" value="">
+                    <input type="text" class="form-control" name="category_id" value="1">
                 </div>
             </div>
 
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">genre</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" name="address" value="">
+                    <input type="text" class="form-control" name="genre" value="">
                 </div>
             </div>
 
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">release_date</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" name="Lname" value="">
+                    <input type="text" class="form-control" name="release_date" value="YYYY/MM/DD">
                 </div>
             </div>
 
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">platform</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" name="email" value="">
+                    <input type="text" class="form-control" name="platform" value="">
                 </div>
             </div>
 
             <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">price</label>
+                <label class="col-sm-3 col-form-label">price<span style="color: red">*</span></label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" name="phone" value="">
+                    <input type="text" class="form-control" name="price" value="$">
                 </div>
             </div>
 
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">discount</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" name="address" value="">
+                    <input type="text" class="form-control" name="discount" value="NULL">
                 </div>
             </div>
 
             <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">quantity</label>
+                <label class="col-sm-3 col-form-label">quantity<span style="color: red">*</span></label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" name="Lname" value="">
+                    <input type="text" class="form-control" name="quantity" value="">
                 </div>
             </div>
 
             <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">image_url_1</label>
+                <label class="col-sm-3 col-form-label">image_url_1<span style="color: red">*</span></label>
                 <div class="col-sm-6">
                     <input type="file" class="form-control" name="image_url_1" accept="image/*" value="">
                 </div>
@@ -113,14 +210,14 @@
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">region</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" name="phone" value="">
+                    <input type="text" class="form-control" name="region" value="GLOBAL">
                 </div>
             </div>
 
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">type_of_product</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" name="address" value="">
+                    <input type="text" class="form-control" name="type_of_product" value="Key">
                 </div>
             </div>
 
@@ -131,7 +228,7 @@
                 </div>
 
                 <div class="col-sm-3 d-grid">
-                    <a class="btn btn-outline-primary" href="product-management.html" role="button">Cancel</a>
+                    <a class="btn btn-outline-primary" href="product-management.php" role="button">Cancel</a>
                 </div>
             </div>
 

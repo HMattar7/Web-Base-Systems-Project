@@ -12,15 +12,23 @@
 </head>
 
 <body class="flex-container-column background-color">
-    <?php include 'header.php'; ?>
+    <header class="default header">
+        <section class="head flex-container-space-between" style="margin: 10%;">
+        
+        <a href="/php/home.php" style="text-decoration: none;" class="site-logo">
+            <img src="images/Logo.svg" alt="Logo">
+            <h1 class="text">Games4Less</h1>
+        </a>
+        
+        </section>
     </header>
     <hr class="horizontal-divider">
     <div class="container my-5">
         <h1>List of Products</h1>
-            <a class='btn btn-primary' id ="id1" href='/php/product-management-newProduct.html' role="button">New Product</a>
+            <a class='btn btn-primary' id ="id1" href='/php/product-management-newProduct.php' role="button">New Product</a>
             <br>
-            <table class="table">
-            <thead>
+            <table class="table" id="t1">
+            <!-- <thead>
                 <tr>
                     <th>product_id</th>
                     <th>title</th>
@@ -39,7 +47,7 @@
                     <th>type_of_product</th>
                     <th>Action</th>
                 </tr>
-            </thead>
+            </thead> -->
         
             <tbody>
 
@@ -66,24 +74,39 @@
 
         //read data of each row
         while($row = $result->fetch_assoc()) { 
+            echo "            
+        <thead>
+            <tr>
+                <th>" . $row["title"] . "</th>
+            </tr>
+        </thead>";
+        $release_date=$row["release_date"];
+        $discount=$row["discount"];
+        if ( empty($release_date)){
+            $release_date = 'No date';
+
+        }else if (empty($discount)){
+            $discount = 'No discount';
+        }
+
             echo "
         <tr>
             <td>" . $row["product_id"] . "</td>
-            <td>" . $row["title"] . "</td>
+            
             <td>" . $row["paragraph"] . "</td>
             <td>" . $row["category_id"] . "</td>
             <td>" . $row["genre"] . "</td>
-            <td>" . $row["release_date"] . "</td>
+            <td>" .  $release_date . "</td>
             <td>" . $row["platform"] . "</td>
             <td>" . $row["price"] . "</td>
-            <td>" . $row["discount"] . "</td>
+            <td>" . $discount . "</td>
             <td>" . $row["quantity"] . "</td>
             <td>" . $row["image_url_1"] . "</td>
             <td>" . $row["image_url_2"] . "</td>
             <td>" . $row["image_url_3"] . "</td>
             <td>" . $row["region"] . "</td>
             <td>" . $row["type_of_product"] . "</td>
-            <td>
+            <td id='tdA'>
                 <a class='btn btn-primary btn-sm' href='/php/product-management-editProduct.php?product_id=$row[product_id]'>Edit</a>
                 <a class='btn btn-danger btn-sm' href='/php/product-management-deleteProduct.php?product_id=$row[product_id]'>Delete</a>
             </td>

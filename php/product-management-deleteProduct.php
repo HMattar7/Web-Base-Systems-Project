@@ -1,6 +1,6 @@
 <?php
 if( isset($_GET["product_id"])){
-    $id = $_GET["product_id"];
+    $product_id = $_GET["product_id"];
 
     $servername = "localhost:3307";
     $username = "root";
@@ -21,6 +21,6 @@ if( isset($_GET["product_id"])){
 
 
 }
-   header("location: /mystore/index.php");
+   header("location: /php/product-management.php");
     exit;
 ?>
