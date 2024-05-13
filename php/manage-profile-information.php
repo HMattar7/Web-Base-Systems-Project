@@ -44,38 +44,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 </head>
 <body class="flex-container-column background-color">
-    <header class="default header">
-        <section class="head flex-container-space-between">
-            <section class="header-icons">
-                <a href="profile.html" class="box round-border header-icons svg-contaior">
-                    <img class="svg-image" src="images/circle.svg" alt="circle">
-                    <img class="svg-image-overlay" src="images/person.svg" alt="person">
-                </a>
+<?php include 'header.php'; ?>
 
-            </section>
-            <section class="header-icons">
-                <div class="box round-border header-icons">
-                    <a href="settings" class="text lungs-currencies">AR/SR</a>
-                </div>
-                
-            </section>
-            <section class="header-icons">
-                <a href="cart.html" class="box round-border header-icons svg-contaior">
-                    <img class="svg-image" src="images/circle.svg" alt="circle">
-                    <img class="svg-image-overlay" src="images/cart.svg" alt="cart">
-                </a>
-                
-            </section>
-        <div class="vertical-divider"></div>
-        <a href="home.html" style="text-decoration: none;" class="site-logo">
-            <img src="images/Logo.svg" alt="Logo">
-            <h1 class="text">Games4Less</h1>
-
-        </a>
-        <div class="vertical-divider"></div>
-    </header>
 
     <hr class="horizontal-divider">
+    <?php include 'navbar.php'; ?>
 
 
     <section class="default flex-container-row text">
