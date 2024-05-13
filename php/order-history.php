@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order History</title>
-    <link rel="icon" type="image/x-icon" href="images/Logo.svg">
+    
     <link href="account-management-styles.css" type="text/css" rel="stylesheet"/>
-    <link href="general.css" type="text/css" rel="stylesheet"/>
+    <?php include 'head.php'; ?>
 
 </head>
 <body class="flex-container-column background-color">
-<?php include 'header.php'; ?>
+    <?php include 'header.php'; ?>
+    
 
     <hr class="horizontal-divider">
     <?php include 'navbar.php'; ?>
@@ -92,23 +93,7 @@ $conn->close();
 
     <hr class="horizontal-divider">
 
-
-    <footer class="default flex-container-space-between text">
-        <section class="footer">
-            <a class="text text-center" href="placholder">About us</a>
-            <a class="text text-center" href="placholder">User Terms & Condition</a>
-            <a class="text text-center" href="placholder">Support</a>
-        </section>
-        <div class="vertical-divider"></div>
-        <section class="outside-links">
-            <a class="" href="placholder"><img class="outside-links-image" src="images/youtube.svg" alt="youtube Link" width="auto"></a>
-            <a class="" href="placholder"><img class="outside-links-image" src="images/Twitter.svg" alt="Twitter Link" width="auto"></a>
-            <a class="" href="placholder"><img class="outside-links-image" src="images/linkedin.svg" alt="linkedin Link" width="auto"></a>
-            <a class="" href="placholder"><img class="outside-links-image" src="images/tiktok.svg" alt="tiktok Link" width="auto"></a>
-            <a class="" href="placholder"><img class="outside-links-image" src="images/instagram.svg" alt="instagram Link" width="auto"></a>
-
-        </section>
-    </footer>
+    <?php include 'footer.php'; ?>
  
 </body>
 </html>
