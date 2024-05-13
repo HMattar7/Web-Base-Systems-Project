@@ -263,3 +263,6 @@ ul{
     transform: translateX(75%);
 
 }
+.image-fix{
+    transform:translateX(-11px);
+}

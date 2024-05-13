@@ -15,46 +15,57 @@
     <?php include 'header.php'; ?>
     
     <?php
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $formIdentifier = $_POST["formIdentifier"];
-            if ($formIdentifier === "Sort By") {
-                $_SESSION["sortOption"] = $_POST["sortOption"];
-                $sortOption = $_POST["sortOption"];
-            }elseif ($formIdentifier === "Genra") {
-                $_SESSION["genraOption"] = $_POST["genraOption"];
-                $genraOption = $_POST["genraOption"];
-            }elseif ($formIdentifier === "PriceRange") {
-                $_SESSION["From"] = $_POST["From"];
-                $FromOption = is_numeric($_POST["From"]) ? $_POST["From"] : "From";
-                $_SESSION["To"] = $_POST["To"];
-                $ToOption = is_numeric($_POST["To"]) ? $_POST["To"] : "To";
-            }elseif ($formIdentifier === "Platform") {
-                $_SESSION["platform"] = $_POST["platform"];
-                $platformOptions = $_POST["platform"];
-            }elseif ($formIdentifier === "Type") {
-                $_SESSION["Type"] = $_POST["Type"];
-                $typeOptions = $_POST["Type"];
-            }elseif ($formIdentifier === "Region") {
-                $_SESSION["Region"] = $_POST["Region"];
-                $regionOptions = $_POST["Region"];
+        try {
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                $formIdentifier = $_POST["formIdentifier"];
+                if ($formIdentifier === "Sort By") {
+                    $_SESSION["sortOption"] = $_POST["sortOption"];
+                    $sortOption = $_POST["sortOption"];
+                }elseif ($formIdentifier === "Genra") {
+                    $_SESSION["genraOption"] = $_POST["genraOption"];
+                    $genraOption = $_POST["genraOption"];
+                }elseif ($formIdentifier === "PriceRange") {
+                    $_SESSION["From"] = $_POST["From"];
+                    $FromOption = is_numeric($_POST["From"]) ? $_POST["From"] : "From";
+                    $_SESSION["To"] = $_POST["To"];
+                    $ToOption = is_numeric($_POST["To"]) ? $_POST["To"] : "To";
+                }elseif ($formIdentifier === "Platform") {
+                    if(isset($_POST["platform"])){
+                        $_SESSION["platform"] = $_POST["platform"];
+                        $platformOptions = $_POST["platform"];
+                    }
+                }elseif ($formIdentifier === "Type") {
+                    if(isset($_POST["Type"])){
+                        $_SESSION["Type"] = $_POST["Type"];
+                        $typeOptions = $_POST["Type"];
+                    }
+                }elseif ($formIdentifier === "Region") {
+                    if(isset($_POST["Region"])){
+                        $_SESSION["Region"] = $_POST["Region"];
+                        $regionOptions = $_POST["Region"];
+                    }
+                }
+                else {
+                    $sortOption = isset($_SESSION['sortOption']) ? $_SESSION["sortOption"] : "alphabetical";
+                    $genraOption = isset($_SESSION["genraOption"]) ? $_SESSION["genraOption"] : "All";
+                    $FromOption = isset($_SESSION["From"]) ? $_SESSION["From"] : "From";
+                    $ToOption = isset($_SESSION["To"]) ? $_SESSION["To"] : "To";
+                    $platformOptions = isset($_SESSION["platform"]) ? $_SESSION["platform"] : "";
+                    $typeOptions = isset($_SESSION["Type"]) ? $_SESSION["Type"] : "";
+                    $regionOptions = isset($_SESSION["Region"]) ? $_SESSION["Region"] : "";
+                } 
             }
-            else {
-                $sortOption = isset($_SESSION['sortOption']) ? $_SESSION["sortOption"] : "alphabetical";
-                $genraOption = isset($_SESSION["genraOption"]) ? $_SESSION["genraOption"] : "All";
-                $FromOption = isset($_SESSION["From"]) ? $_SESSION["From"] : "From";
-                $ToOption = isset($_SESSION["To"]) ? $_SESSION["To"] : "To";
-                $platformOptions = isset($_SESSION["platform"]) ? $_SESSION["platform"] : "";
-                $typeOptions = isset($_SESSION["Type"]) ? $_SESSION["Type"] : "";
-                $regionOptions = isset($_SESSION["Region"]) ? $_SESSION["Region"] : "";
-            } 
+            $sortOption = isset($_SESSION['sortOption']) ? $_SESSION["sortOption"] : "alphabetical";
+            $genraOption = isset($_SESSION["genraOption"]) ? $_SESSION["genraOption"] : "All";
+            $FromOption = isset($_SESSION["From"]) ? $_SESSION["From"] : "From";
+            $ToOption = isset($_SESSION["To"]) ? $_SESSION["To"] : "To";
+            $platformOptions = isset($_SESSION["platform"]) ? $_SESSION["platform"] : "";
+            $typeOptions = isset($_SESSION["Type"]) ? $_SESSION["Type"] : "";
+            $regionOptions = isset($_SESSION["Region"]) ? $_SESSION["Region"] : "";
+        } catch (Exception $e) {
+            ///
         }
-        $sortOption = isset($_SESSION['sortOption']) ? $_SESSION["sortOption"] : "alphabetical";
-        $genraOption = isset($_SESSION["genraOption"]) ? $_SESSION["genraOption"] : "All";
-        $FromOption = isset($_SESSION["From"]) ? $_SESSION["From"] : "From";
-        $ToOption = isset($_SESSION["To"]) ? $_SESSION["To"] : "To";
-        $platformOptions = isset($_SESSION["platform"]) ? $_SESSION["platform"] : "";
-        $typeOptions = isset($_SESSION["Type"]) ? $_SESSION["Type"] : "";
-        $regionOptions = isset($_SESSION["Region"]) ? $_SESSION["Region"] : "";
+        
         
     ?>
 
@@ -355,8 +366,16 @@
                     $region = $row['region'];
                     $type_of_product = $row['type_of_product'];
 
-                    $imagePath = './games_images/' . $image_url_1 . '.avif';
-                    if (!file_exists('./games_images/' . $image_url_1 . '.avif')) { $imagePath ="https://placehold.co/600x400/png"; }
+
+                    if (file_exists('./games_images/' . $image_url_1 . '.avif')){
+                        $imagePath = './games_images/' . $image_url_1 . '.avif';
+                    }elseif (file_exists('./games_images/' . $image_url_1 . '.jpg')){
+                        $imagePath = './games_images/' . $image_url_1 . '.jpg';
+                    }elseif (file_exists('./games_images/' . $image_url_1 . '.png')){
+                        $imagePath = './games_images/' . $image_url_1 . '.png';
+                    }else{
+                        $imagePath ="https://placehold.co/600x400/png";
+                    }
 
                     echo "
                         <li class=''>
@@ -406,15 +425,25 @@
                         $region = $row['region'];
                         $type_of_product = $row['type_of_product'];
 
-                        $imagePath = './games_images/' . $image_url_1 . '.avif';
-                        if (!file_exists('./games_images/' . $image_url_1 . '.avif')) { $imagePath ="https://placehold.co/600x400/png"; }
+                        if (file_exists('./games_images/' . $image_url_1 . '.avif')){
+                            $imagePath = './games_images/' . $image_url_1 . '.avif';
+                        }elseif (file_exists('./games_images/' . $image_url_1 . '.jpg')){
+                            $imagePath = './games_images/' . $image_url_1 . '.jpg';
+                        }elseif (file_exists('./games_images/' . $image_url_1 . '.png')){
+                            $imagePath = './games_images/' . $image_url_1 . '.png';
+                        }elseif (file_exists('./games_images/' . $image_url_1)){
+                            $imagePath = './games_images/' . $image_url_1;
+                        }else{
+                            $imagePath ="https://placehold.co/600x400/png";
+                        }
+                        
                         
                         echo "
                             <li class='' onclick=\"sendGetRequest('$url', '$product_id')\">
                             <div class='card' style=''>
                                 <div class='icon'>
                                     <h3>$title</h3>
-                                    <img class='secondary-image round-border' src='$imagePath' alt='$title'></img>
+                                    <img class='secondary-image round-border image-fix' src='$imagePath' alt='$title'></img>
                                 </div>
                                 <div class='product-details text'>
                                     <h2>Platform:$platform </h2>

@@ -1,8 +1,10 @@
 <?php
+include("head.php");
+
 if( isset($_GET["product_id"])){
     $product_id = $_GET["product_id"];
 
-    $servername = "localhost:3307";
+    $servername = "localhost:3306";///edited to 3306 from 3307
     $username = "root";
     $password = "";
     $database = "games4less";

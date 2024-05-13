@@ -1,5 +1,7 @@
 <?php
-$servername = "localhost:3307";
+include("head.php");
+
+$servername = "localhost:3306";///edited to 3306 from 3307
 $username = "root";
 $password = "";
 $database = "games4less";
@@ -167,7 +169,7 @@ if( $_SERVER[ 'REQUEST_METHOD' ] == 'POST' ) {
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">price<span style="color: red">*</span></label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" name="price" value="$">
+                    <input type="text" class="form-control" name="price" value="">
                 </div>
             </div>
 
