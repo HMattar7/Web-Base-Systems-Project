@@ -44,7 +44,11 @@
                         $_SESSION["Region"] = $_POST["Region"];
                         $regionOptions = $_POST["Region"];
                     }
+                }elseif ($formIdentifier === "search-form") {
+                    $search_value = $_POST["search-value"];
+                    $search_query = "SELECT * FROM product WHERE title LIKE '%$search_value%'";
                 }
+                
                 else {
                     $sortOption = isset($_SESSION['sortOption']) ? $_SESSION["sortOption"] : "alphabetical";
                     $genraOption = isset($_SESSION["genraOption"]) ? $_SESSION["genraOption"] : "All";
@@ -55,6 +59,7 @@
                     $regionOptions = isset($_SESSION["Region"]) ? $_SESSION["Region"] : "";
                 } 
             }
+            
             $sortOption = isset($_SESSION['sortOption']) ? $_SESSION["sortOption"] : "alphabetical";
             $genraOption = isset($_SESSION["genraOption"]) ? $_SESSION["genraOption"] : "All";
             $FromOption = isset($_SESSION["From"]) ? $_SESSION["From"] : "From";
@@ -62,10 +67,29 @@
             $platformOptions = isset($_SESSION["platform"]) ? $_SESSION["platform"] : "";
             $typeOptions = isset($_SESSION["Type"]) ? $_SESSION["Type"] : "";
             $regionOptions = isset($_SESSION["Region"]) ? $_SESSION["Region"] : "";
+
+            if (isset($_GET["Navbar"])){
+                $Navbar_Option = $_GET["Navbar"];
+    
+                if (isset($_GET["MaxPrice"])){
+                    $ToOption = $_GET["MaxPrice"];
+                    $platformOptions = array($_GET["Platform"]);
+                } 
+                if (isset($_GET["Platform"])) {
+                    $platformOptions = array($_GET["Platform"]);
+                }
+                if (isset($_GET["Genra"])) {
+                    $genraOption = $_GET["Genra"];
+                }
+
+                unset($_GET["Navbar"]);
+                unset($_GET["Platform"]);
+                unset($_GET["Genra"]);
+            }
+
         } catch (Exception $e) {
             ///
         }
-        
         
     ?>
 
@@ -347,7 +371,16 @@
                 $genra_query = ($genraOption == "All") ? null : "AND `genre` = '$genraOption'";
                 //query ends
                 $lower_limit = abs($page-1) * 8;
-                $select_query = "SELECT * FROM `product` WHERE 1=1 $genra_query $platform_query $type_query $region_query $PriceRange_query $sort_query LIMIT $lower_limit, 8";
+                if (isset($search_query) && !empty($search_query)) {
+                    $select_query = $search_query;
+                }
+                else if (isset($ToOption) && !empty($ToOption)) {
+                    $select_query = "SELECT * FROM `product` WHERE 1=1 $genra_query $platform_query $type_query $region_query $PriceRange_query $sort_query LIMIT $lower_limit, 8";
+                }
+                else {
+                    $select_query = "SELECT * FROM `product` WHERE 1=1 $genra_query $platform_query $type_query $region_query $PriceRange_query $sort_query LIMIT $lower_limit, 8";
+                }
+                // echo "$select_query";
                 $result_query = mysqli_query($db_link, $select_query);
                 while ($row = mysqli_fetch_array($result_query)) {
                     $product_id = $row['product_id'];
@@ -405,7 +438,12 @@
                     $db_link = mysqli_connect("localhost:3306",$sql_name, $sql_pass);
                     mysqli_select_db($db_link,"games4less");
                     $lower_limit = ($page - 1) * 16;
-                    $select_query = "SELECT * FROM `product` WHERE 1=1 $genra_query $platform_query $type_query $region_query $PriceRange_query $sort_query LIMIT $lower_limit, 16";
+                    if (isset($search_query) && !empty($search_query)) {
+                        $select_query = $search_query;
+                    }
+                    else {
+                        $select_query = "SELECT * FROM `product` WHERE 1=1 $genra_query $platform_query $type_query $region_query $PriceRange_query $sort_query LIMIT $lower_limit, 16";
+                    }
                     $result_query = mysqli_query($db_link, $select_query);
                     $url = "ProductPages.php";
                     while ($row = mysqli_fetch_array($result_query)) {
