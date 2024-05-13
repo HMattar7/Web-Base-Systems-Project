@@ -9,11 +9,11 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
-$user_id = $_SESSION['user_id'];  
+$user_id = isset($_SESSION["user_id"]) ? $_SESSION["user_id"] : 123;  
 
-$sql = "SELECT username, email, fname, lname, phone_number, country, shipping_address 
-FROM users 
-WHERE id = $user_id";
+$sql = "SELECT username, email, first_name, last_name, phone_number, country, shipping_address 
+FROM user 
+WHERE user_id = $user_id";
 
 $result = $conn->query($sql);
 
@@ -21,8 +21,8 @@ if ($result->num_rows > 0) {
   $row = $result->fetch_assoc();
   $username = $row["username"];
   $email = $row["email"];
-  $fname = $row["fname"];
-  $lname = $row["lname"];
+  $fname = $row["first_name"];
+  $lname = $row["last_name"];
   $phone_number = $row["phone_number"];
   $country = $row["country"];
   $shipping_address = $row["shipping_address"];

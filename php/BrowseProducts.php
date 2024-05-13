@@ -81,10 +81,6 @@
                 if (isset($_GET["Genra"])) {
                     $genraOption = $_GET["Genra"];
                 }
-
-                unset($_GET["Navbar"]);
-                unset($_GET["Platform"]);
-                unset($_GET["Genra"]);
             }
 
         } catch (Exception $e) {
@@ -373,14 +369,9 @@
                 $lower_limit = abs($page-1) * 8;
                 if (isset($search_query) && !empty($search_query)) {
                     $select_query = $search_query;
-                }
-                else if (isset($ToOption) && !empty($ToOption)) {
+                }else {
                     $select_query = "SELECT * FROM `product` WHERE 1=1 $genra_query $platform_query $type_query $region_query $PriceRange_query $sort_query LIMIT $lower_limit, 8";
                 }
-                else {
-                    $select_query = "SELECT * FROM `product` WHERE 1=1 $genra_query $platform_query $type_query $region_query $PriceRange_query $sort_query LIMIT $lower_limit, 8";
-                }
-                // echo "$select_query";
                 $result_query = mysqli_query($db_link, $select_query);
                 while ($row = mysqli_fetch_array($result_query)) {
                     $product_id = $row['product_id'];
@@ -502,22 +493,45 @@
     <section>
         <div class="pagination">
             <?php 
-            if(isset($_GET['page-nr']) && $_GET['page-nr'] > 1){
-                ?> <a href="?page-nr=<?php echo $_GET['page-nr'] - 1 ?>" class="pagination-item">Previous</a> <?php
-            }else{
-                ?> <a class="pagination-item" >Previous</a>	<?php
-            }
-            ?>
-            <?php 
-            if(isset($_GET['page-nr'])){
-                if($_GET['page-nr'] >= 100){
-                    ?> <a class="pagination-item" >Next</a> <?php
+            $save_url = $_SERVER["REQUEST_URI"];
+            if (substr_count($_SERVER["REQUEST_URI"],"?")) {
+                if(isset($_GET['page-nr']) && $_GET['page-nr'] > 1){
+                    ?> <a href="<?php echo $save_url?>&page-nr=<?php echo $_GET['page-nr'] - 1 ?>" class="pagination-item">Previous</a> <?php
                 }else{
-                    ?> <a href="?page-nr=<?php echo $_GET['page-nr'] + 1 ?>" class="pagination-item">Next</a> <?php
+                    ?> <a class="pagination-item" >Previous</a>	<?php
                 }
             }else{
-                ?> <a href="?page-nr=2">Next</a> <?php
+                if(isset($_GET['page-nr']) && $_GET['page-nr'] > 1){
+                    ?> <a href="?page-nr=<?php echo $_GET['page-nr'] - 1 ?>" class="pagination-item">Previous</a> <?php
+                }else{
+                    ?> <a class="pagination-item" >Previous</a>	<?php
+                }
             }
+            
+            ?>
+            <?php 
+            if (substr_count($_SERVER["REQUEST_URI"],"?")) {
+                if(isset($_GET['page-nr'])){
+                    if($_GET['page-nr'] >= 100){
+                        ?> <a class="pagination-item" >Next</a> <?php
+                    }else{
+                        ?> <a href="<?php echo $save_url?>&page-nr=<?php echo $_GET['page-nr'] + 1 ?>" class="pagination-item">Next</a> <?php
+                    }
+                }else{
+                    ?> <a href="<?php echo $save_url?>&page-nr=2">Next</a> <?php
+                }
+            }else{
+                if(isset($_GET['page-nr'])){
+                    if($_GET['page-nr'] >= 100){
+                        ?> <a class="pagination-item" >Next</a> <?php
+                    }else{
+                        ?> <a href="?page-nr=<?php echo $_GET['page-nr'] + 1 ?>" class="pagination-item">Next</a> <?php
+                    }
+                }else{
+                    ?> <a href="?page-nr=2">Next</a> <?php
+                }
+            }
+            
             ?>
             
         </div>

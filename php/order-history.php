@@ -50,10 +50,10 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
- 
+$user_id = isset($_SESSION["user_id"]) ? $_SESSION["user_id"] : 123; 
 $sql = "SELECT o.order_id, o.date_placed, o.total_price
         FROM order o
-        WHERE o.user_id = " . $_SESSION['user_id'] . "
+        WHERE o.user_id = " . $user_id . "
         ORDER BY o.order_id DESC";
 
 $result = $conn->query($sql);
