@@ -1,4 +1,38 @@
-<!DOCTYPE html>
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+  $servername = "localhost:3306";
+  $username = "root";
+  $password = "";
+  $dbname = "games4less";
+  $conn = new mysqli($servername, $username, $password, $dbname);
+  
+  if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+  }
+
+  $username = mysqli_real_escape_string($conn, $_POST['username']);
+  $firstName = mysqli_real_escape_string($conn, $_POST['fname']);
+  $lastName = mysqli_real_escape_string($conn, $_POST['lname']);
+  $email = mysqli_real_escape_string($conn, $_POST['email']);
+  $phone = mysqli_real_escape_string($conn, $_POST['phone-num']);
+  $country = mysqli_real_escape_string($conn, $_POST['country']);
+  $password = mysqli_real_escape_string($conn, $_PASSWORD['password']);
+  $shippingAddress = mysqli_real_escape_string($conn, $_POST['shipping']);
+
+  $sql = "INSERT INTO user (username, first_name, last_name, email, phone_number, country, password, address) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+  $stmt = mysqli_prepare($conn, $sql);
+
+  mysqli_stmt_bind_param($stmt, "ssssssss", $username, $firstName, $lastName, $email, $phone, $country, $password, $shippingAddress);
+
+  mysqli_stmt_close($stmt);
+  mysqli_close($conn);
+}
+
+?>
+ 
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,9 +45,6 @@
 </head>
 <body class="flex-container-column background-color">
     <?php include 'header.php'; ?>
-    
-
-    <hr class="horizontal-divider">
 
 
     <section class="default flex-container-row text">
@@ -23,13 +54,13 @@
             </div>
             <div class="content-box bottom-margin">
                 <div class="flex-container-row clicked-on">
-                    <h2><a class="clicked-on" href="./profile-overview.html">Profile</a></h2>
+                    <h2><a class="clicked-on" href="./profile-overview.php">Profile</a></h2>
                 </div>
                 <div class="flex-container-row clicked-on">
-                    <h2><a class="clicked-on" href="./manage-profile-information.html">Edit Profile Information</a></h2>
+                    <h2><a class="clicked-on" href="../Html/manage-profile-information.html">Edit Profile Information</a></h2>
                 </div>
                 <div class="flex-container-row clicked-on">
-                    <h2><a class="clicked-on" href="./order-history.html">Order History</a></h2>
+                    <h2><a class="clicked-on" href="./order-history.php">Order History</a></h2>
                 </div>
             </div>
               
@@ -37,7 +68,7 @@
         <section class="default general-box text flex-container-column content-box ">
             <h2 class="named-header">Edit Profile Information</h2>
             <div>
-                <form class="flex-container-column" action="" method="post">
+                <form class="flex-container-column" action="../php/manage-profile-information.php" method="post">
                     <div class="flex-container-row">
                         <div class="content-box">
                             <h2>Username:</h2>
@@ -63,16 +94,20 @@
                             <input class="text disabled-text-input" type="country" name="country" id="country" placeholder="eg. USA">
                         </div>
                     </div>
-                    <div class="content-box">
-                        <h2>Password:</h2>
-                        <input class="text disabled-text-input" type="password" name="password" id="password" placeholder="**********" maxlength="30">
+                    <div class="flex-container-row">
+                        <div class="content-box">
+                            <h2>Password:</h2>
+                            <input class="text disabled-text-input" type="password" name="password" id="password" placeholder="**********" maxlength="30">
+                        </div>
+                        <div class="content-box">
+                            <h2>Shipping Address:</h2>
+                            <input class="text disabled-text-input" type="text" name="shipping" id="shipping" placeholder="" maxlength="50">
+                        </div>
                     </div>
                     <br>
                     <div class="flex-container-space-between">
-                        <button id="save" class="buttons">Save</button>
-                        <button id="clear" class="buttons">Clear</button>
-                    </div>
-                    
+                      <h2>Your information has been updated!</h2>                
+                  </div>
                 </form>
             </div>
         </section>

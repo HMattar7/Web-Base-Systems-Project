@@ -1,3 +1,36 @@
+<?php
+
+$servername = "localhost:3306";
+$username = "root";
+$password = "";
+$dbname = "games4less";
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
+$user_id = $_SESSION['user_id'];  
+
+$sql = "SELECT username, email, fname, lname, phone_number, country, shipping_address 
+FROM users 
+WHERE id = $user_id";
+
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+  $row = $result->fetch_assoc();
+  $username = $row["username"];
+  $email = $row["email"];
+  $fname = $row["fname"];
+  $lname = $row["lname"];
+  $phone_number = $row["phone_number"];
+  $country = $row["country"];
+  $shipping_address = $row["shipping_address"];
+}
+
+$conn->close();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,6 +47,7 @@
     
 
     <hr class="horizontal-divider">
+    <?php include 'navbar.php'; ?>
 
 
     <section class="default flex-container-row text">
@@ -23,13 +57,13 @@
             </div>
             <div class="content-box bottom-margin">
                 <div class="flex-container-row clicked-on">
-                    <h2><a class="clicked-on" href="./profile-overview.html">Profile</a></h2>
+                    <h2><a class="clicked-on" href="./profile-overview.php">Profile</a></h2>
                 </div>
                 <div class="flex-container-row clicked-on">
-                    <h2><a class="clicked-on" href="./manage-profile-information.html">Edit Profile Information</a></h2>
+                    <h2><a class="clicked-on" href="../Html/manage-profile-information.html">Edit Profile Information</a></h2>
                 </div>
                 <div class="flex-container-row clicked-on">
-                    <h2><a class="clicked-on" href="./order-history.html">Order History</a></h2>
+                    <h2><a class="clicked-on" href="./order-history.php">Order History</a></h2>
                 </div>
             </div>
               
@@ -40,31 +74,37 @@
                 <div class="flex-container-row">
                     <div class="content-box">
                         <h2>Username:</h2>
-                        <input type="text" name="username" id="username"  disabled class="text disabled-text-input" placeholder="placeholder">
+                        <input type="text" name="username" id="username"  disabled class="text disabled-text-input" placeholder="placeholder" value="<?php echo $username; ?>">
                     </div>
                     <div class="content-box">
                         <h2>Name:</h2>
-                        <input type="text" class="text disabled-text-input" placeholder="placeholder"name="fname" id="fname"  disabled >
-                        <input type="text" class="text disabled-text-input" placeholder="placeholder"name="lname" id="lname"  disabled >
+                        <input type="text" class="text disabled-text-input" placeholder="placeholder"name="fname" id="fname"  disabled value="<?php echo $fname; ?>">
+                        <input type="text" class="text disabled-text-input" placeholder="placeholder"name="lname" id="lname"  disabled value="<?php echo $lname; ?>">
                     </div>
                     <div class="content-box">
                         <h2>Email Address:</h2>
-                        <input type="text" class="text disabled-text-input" placeholder="placeholder"name="email" id="email"  disabled >
+                        <input type="text" class="text disabled-text-input" placeholder="placeholder"name="email" id="email"  disabled value="<?php echo $email; ?>">
                     </div>
                 </div>
                 <div class="flex-container-row">
                     <div class="content-box">
                         <h2>Phone number:</h2>
-                        <input type="text" class="text disabled-text-input" placeholder="placeholder"name="phone-num" id="phone-num"  disabled >
+                        <input type="text" class="text disabled-text-input" placeholder="placeholder"name="phone-num" id="phone-num"  disabled value="<?php echo $phone_number; ?>">
                     </div>
                     <div class="content-box">
                         <h2>Country:</h2>
-                        <input type="text" class="text disabled-text-input" placeholder="placeholder"name="country" id="country"  disabled >
+                        <input type="text" class="text disabled-text-input" placeholder="placeholder"name="country" id="country"  disabled value="<?php echo $country; ?>">
                     </div>
                 </div>
-                <div class="content-box">
-                    <h2>Password:</h2>
-                    <input type="text" class="text disabled-text-input" placeholder="placeholder"name="password" id="password"  disabled >
+                <div class="flex-container-row">
+                    <div class="content-box">
+                        <h2>Password:</h2>
+                        <input type="text" class="text disabled-text-input" placeholder="********" name="password" id="password"  disabled >
+                    </div>
+                    <div class="content-box">
+                        <h2>Shipping Address:</h2>
+                        <input type="text" class="text disabled-text-input" placeholder="placeholder"name="shipping" id="shipping"  disabled value="<?php echo $shipping_address; ?>">
+                    </div>
                 </div>
                 <br>
             </form>
