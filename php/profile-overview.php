@@ -1,4 +1,40 @@
-<!DOCTYPE html>
+<?php
+
+$servername = "localhost:3306";
+$username = "root";
+$password = "";
+$dbname = "games4less";
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
+$user_id = $_SESSION['user_id'];  
+
+$sql = "SELECT username, email, fname, lname, phone_number, country, shipping_address 
+FROM users 
+WHERE id = $user_id";
+
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+  $row = $result->fetch_assoc();
+  $username = $row["username"];
+  $email = $row["email"];
+  $fname = $row["fname"];
+  $lname = $row["lname"];
+  $phone_number = $row["phone_number"];
+  $country = $row["country"];
+  $shipping_address = $row["shipping_address"];
+}
+# else {
+  #echo "Error: User information not found";
+# }
+
+$conn->close();
+?>
+
+<!DOCTYPE html> 
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,12 +42,40 @@
     <title>Profile Overview</title>
     <link rel="icon" type="image/x-icon" href="./images/Logo.svg">
     <link href="account-management-styles.css" type="text/css" rel="stylesheet"/>
-    <?php include 'head.php'; ?>
+    <link href="general.css" type="text/css" rel="stylesheet"/>
 
 </head>
 <body class="flex-container-column background-color">
-    <?php include 'header.php'; ?>
-    
+    <header class="default header">
+        <section class="head flex-container-space-between">
+            <section class="header-icons">
+                <a href="profile.html" class="box round-border header-icons svg-contaior">
+                    <img class="svg-image" src="images/circle.svg" alt="circle">
+                    <img class="svg-image-overlay" src="images/person.svg" alt="person">
+                </a>
+
+            </section>
+            <section class="header-icons">
+                <div class="box round-border header-icons">
+                    <a href="settings" class="text lungs-currencies">AR/SR</a>
+                </div>
+                
+            </section>
+            <section class="header-icons">
+                <a href="cart.html" class="box round-border header-icons svg-contaior">
+                    <img class="svg-image" src="images/circle.svg" alt="circle">
+                    <img class="svg-image-overlay" src="images/cart.svg" alt="cart">
+                </a>
+                
+            </section>
+        <div class="vertical-divider"></div>
+        <a href="home.html" style="text-decoration: none;" class="site-logo">
+            <img src="images/Logo.svg" alt="Logo">
+            <h1 class="text">Games4Less</h1>
+
+        </a>
+        <div class="vertical-divider"></div>
+    </header>
 
     <hr class="horizontal-divider">
 
@@ -23,13 +87,13 @@
             </div>
             <div class="content-box bottom-margin">
                 <div class="flex-container-row clicked-on">
-                    <h2><a class="clicked-on" href="./profile-overview.html">Profile</a></h2>
+                    <h2><a class="clicked-on" href="./profile-overview.php">Profile</a></h2>
                 </div>
                 <div class="flex-container-row clicked-on">
-                    <h2><a class="clicked-on" href="./manage-profile-information.html">Edit Profile Information</a></h2>
+                    <h2><a class="clicked-on" href="../Html/manage-profile-information.html">Edit Profile Information</a></h2>
                 </div>
                 <div class="flex-container-row clicked-on">
-                    <h2><a class="clicked-on" href="./order-history.html">Order History</a></h2>
+                    <h2><a class="clicked-on" href="./order-history.php">Order History</a></h2>
                 </div>
             </div>
               
@@ -40,31 +104,37 @@
                 <div class="flex-container-row">
                     <div class="content-box">
                         <h2>Username:</h2>
-                        <input type="text" name="username" id="username"  disabled class="text disabled-text-input" placeholder="placeholder">
+                        <input type="text" name="username" id="username"  disabled class="text disabled-text-input" placeholder="placeholder" value="<?php echo $username; ?>">
                     </div>
                     <div class="content-box">
                         <h2>Name:</h2>
-                        <input type="text" class="text disabled-text-input" placeholder="placeholder"name="fname" id="fname"  disabled >
-                        <input type="text" class="text disabled-text-input" placeholder="placeholder"name="lname" id="lname"  disabled >
+                        <input type="text" class="text disabled-text-input" placeholder="placeholder"name="fname" id="fname"  disabled value="<?php echo $fname; ?>">
+                        <input type="text" class="text disabled-text-input" placeholder="placeholder"name="lname" id="lname"  disabled value="<?php echo $lname; ?>">
                     </div>
                     <div class="content-box">
                         <h2>Email Address:</h2>
-                        <input type="text" class="text disabled-text-input" placeholder="placeholder"name="email" id="email"  disabled >
+                        <input type="text" class="text disabled-text-input" placeholder="placeholder"name="email" id="email"  disabled value="<?php echo $email; ?>">
                     </div>
                 </div>
                 <div class="flex-container-row">
                     <div class="content-box">
                         <h2>Phone number:</h2>
-                        <input type="text" class="text disabled-text-input" placeholder="placeholder"name="phone-num" id="phone-num"  disabled >
+                        <input type="text" class="text disabled-text-input" placeholder="placeholder"name="phone-num" id="phone-num"  disabled value="<?php echo $phone_number; ?>">
                     </div>
                     <div class="content-box">
                         <h2>Country:</h2>
-                        <input type="text" class="text disabled-text-input" placeholder="placeholder"name="country" id="country"  disabled >
+                        <input type="text" class="text disabled-text-input" placeholder="placeholder"name="country" id="country"  disabled value="<?php echo $country; ?>">
                     </div>
                 </div>
-                <div class="content-box">
-                    <h2>Password:</h2>
-                    <input type="text" class="text disabled-text-input" placeholder="placeholder"name="password" id="password"  disabled >
+                <div class="flex-container-row">
+                    <div class="content-box">
+                        <h2>Password:</h2>
+                        <input type="text" class="text disabled-text-input" placeholder="********" name="password" id="password"  disabled >
+                    </div>
+                    <div class="content-box">
+                        <h2>Shipping Address:</h2>
+                        <input type="text" class="text disabled-text-input" placeholder="placeholder"name="shipping" id="shipping"  disabled value="<?php echo $shipping_address; ?>">
+                    </div>
                 </div>
                 <br>
             </form>
@@ -74,7 +144,22 @@
 
     <hr class="horizontal-divider">
     
-    <?php include 'footer.php'; ?>
+    <footer class="default flex-container-space-between text">
+        <section class="footer">
+            <a class="text text-center" href="placholder">About us</a>
+            <a class="text text-center" href="placholder">User Terms & Condition</a>
+            <a class="text text-center" href="placholder">Support</a>
+        </section>
+        <div class="vertical-divider"></div>
+        <section class="outside-links">
+            <a class="" href="placholder"><img class="outside-links-image" src="images/youtube.svg" alt="youtube Link" width="auto"></a>
+            <a class="" href="placholder"><img class="outside-links-image" src="images/Twitter.svg" alt="Twitter Link" width="auto"></a>
+            <a class="" href="placholder"><img class="outside-links-image" src="images/linkedin.svg" alt="linkedin Link" width="auto"></a>
+            <a class="" href="placholder"><img class="outside-links-image" src="images/tiktok.svg" alt="tiktok Link" width="auto"></a>
+            <a class="" href="placholder"><img class="outside-links-image" src="images/instagram.svg" alt="instagram Link" width="auto"></a>
+
+        </section>
+    </footer>
     
 </body>
 </html>
