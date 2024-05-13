@@ -53,35 +53,39 @@ if ($conn->connect_error) {
 $user_id = isset($_SESSION["user_id"]) ? $_SESSION["user_id"] : 123; 
 $sql = "SELECT o.order_id, o.date_placed, o.total_price
         FROM order o
-        WHERE o.user_id = " . $user_id . "
+        WHERE o.user_id = $user_id
         ORDER BY o.order_id DESC";
-
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-  echo "<table>
-          <tr>
-            <th>Order ID</th>
-            <th>Date Placed</th>
-            <th>Total Price</th>
-          </tr>";
-
-  while($row = $result->fetch_assoc()) {
-    $order_id = $row["order_id"];
-    $date_placed = $row["date_placed"];
-    $total_price = $row["total_price"];
-
-    echo "<tr>
-            <td>$order_id</td>
-            <td>$date_placed</td>
-            <td>$total_price</td>
-          </tr>";
-  }
-
-  echo "</table>";
-} else {
-  echo "No orders found in your history.";
+try{
+    if (isset($result) &&$result->num_rows > 0) {
+        echo "<table>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Date Placed</th>
+                  <th>Total Price</th>
+                </tr>";
+      
+        while($row = $result->fetch_assoc()) {
+          $order_id = $row["order_id"];
+          $date_placed = $row["date_placed"];
+          $total_price = $row["total_price"];
+      
+          echo "<tr>
+                  <td>$order_id</td>
+                  <td>$date_placed</td>
+                  <td>$total_price</td>
+                </tr>";
+        }
+      
+        echo "</table>";
+      } else {
+        echo "No orders found in your history.";
+      }
+} catch(Exception $e) {
+    echo "No orders found in your history.";
 }
+
+
+
 
 $conn->close();
 ?>
