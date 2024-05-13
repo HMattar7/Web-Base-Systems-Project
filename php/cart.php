@@ -1,3 +1,24 @@
+
+<?php
+// Database connection
+$servername = "localhost";
+$username = "root"; // Change this to your database username
+$password = "";
+$dbname = "games4less"; // Change this to your database name
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Query to select games from the database
+$sql = "SELECT * FROM `product`";
+$result = $conn->query($sql);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,8 +30,9 @@
     <link href="Product-Pages-styles.css" type="text/css" rel="stylesheet"/>
     <?php include 'head.php'; ?>
 
+    <!-- Your CSS styles -->
     <style>
-        .modal {
+          .modal {
             display: none; 
             position: fixed; 
             z-index: 1; 
@@ -50,105 +72,62 @@
 <body class="flex-container-column background-color">
     <?php include 'header.php'; ?>
     
-<hr class="horizontal-divider">
-<?php include 'navbar.php'; ?>
+    <hr class="horizontal-divider">
+    <?php include 'navbar.php'; ?>
 
+    <div class="small-container cart-page">
+        <table class="item-table">
+            <caption>Your Cart</caption>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                // Check if there are any games in the database
+                if ($result->num_rows > 0) {
+                    // Output data of each row
+                    $index = 1;
+                    while($row = $result->fetch_assoc()) {
+                        echo "<tr>";
+                        echo "<td>" . $index . "</td>";
+                        echo "<td>";
+                        echo "<div class='cart-info'>";
+                        echo "<div>";
+                        echo "<p>" . $row["title"] . "</p>";
+                        echo "<small>Price: $" . $row["price"] . "</small><br>";
+                        echo "<button class='delete-button'><img src='images/delete.svg' alt='Delete'></button>";
+                        echo "</div>";
+                        echo "</div>";
+                        echo "</td>";
+                        echo "<td>";
+                        echo "<div class='quantity-container'>";
+                        echo "<input type='number' value='1' class='quantity-input'>";
+                        echo "<div class='quantity-controls'>";
+                        echo "<button class='quantity-up'><img src='images/up.svg' alt='Up'></button>";
+                        echo "<button class='quantity-down'><img src='images/down.svg' alt='Down'></button>";
+                        echo "</div>";
+                        echo "</div>";
+                        echo "</td>";
+                        echo "<td class='item-price'>$" . $row["price"] . "</td>";
+                        echo "<td class='item-subtotal'>$" . $row["price"] . "</td>";
+                        echo "</tr>";
+                        $index++;
+                    }
+                } else {
+                    echo "<tr><td colspan='5'>No games found</td></tr>";
+                }
+                ?>
+            </tbody>
+        </table>
 
-<div class="small-container cart-page">
-
-    <table class="item-table">
-        <caption>Your Cart</caption>
-        <thead>
-        <tr>
-            <th>#</th>
-            <th>Product</th>
-            <th>Quantity</th>
-            <th>Price</th>
-            <th>Subtotal</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>1</td>
-            <td>
-                <div class="cart-info">
-                    <img src="images/gtav.jpg" alt="gta v">
-                    <div>
-                        <p>Grand Theft Auto V</p>
-                        <small>Price: $59.99</small>
-                        <br>
-                        <button class="delete-button"><img src="images/delete.svg" alt="Delete"></button>
-                    </div>
-                </div>
-            </td>
-            <td>
-                <div class="quantity-container">
-                    <input type="number" value="1" class="quantity-input">
-                    <div class="quantity-controls">
-                        <button class="quantity-up"><img src="images/up.svg" alt="Up"></button>
-                        <button class="quantity-down"><img src="images/down.svg" alt="Down"></button>
-                    </div>
-                </div>
-            </td>
-            <td class="item-price">$59.99</td>
-            <td class="item-subtotal">$59.99</td>
-        </tr>
-
-        <tr>
-            <td>2</td>
-            <td>
-                <div class="cart-info">
-                    <img src="images/gtaiv.jpg" alt="gta v">
-                    <div>
-                        <p>Grand Theft Auto IV</p>
-                        <small>Price: $49.99</small>
-                        <br>
-                        <button class="delete-button"><img src="images/delete.svg" alt="Delete"></button>
-                    </div>
-                </div>
-            </td>
-            <td>
-                <div class="quantity-container">
-                    <input type="number" value="1" class="quantity-input">
-                    <div class="quantity-controls">
-                        <button class="quantity-up"><img src="images/up.svg" alt="Up"></button>
-                        <button class="quantity-down"><img src="images/down.svg" alt="Down"></button>
-                    </div>
-                </div>
-            </td>
-            <td class="item-price">$49.99</td>
-            <td class="item-subtotal">$49.99</td>
-        </tr>
-
-        <tr>
-            <td>3</td>
-            <td>
-                <div class="cart-info">
-                    <img src="images/gtasa.jpg" alt="gta v">
-                    <div>
-                        <p>Grand Theft Auto IV</p>
-                        <small>Price: $19.99</small>
-                        <br>
-                        <button class="delete-button"><img src="images/delete.svg" alt="Delete"></button>
-                    </div>
-                </div>
-            </td>
-            <td>
-                <div class="quantity-container">
-                    <input type="number" value="1" class="quantity-input">
-                    <div class="quantity-controls">
-                        <button class="quantity-up"><img src="images/up.svg" alt="Up"></button>
-                        <button class="quantity-down"><img src="images/down.svg" alt="Down"></button>
-                    </div>
-                </div>
-            </td>
-            <td class="item-price">$19.99</td>
-            <td class="item-subtotal">$19.99</td>
-        </tr>
-        </tbody>
-    </table>
-
-    <div class="total-price">
+        <!-- Your total price section -->
+        <div class="total-price">
         <table>
             <tr>
                 <td>Subtotal</td>
@@ -168,23 +147,28 @@
                 </td>
             </tr>
         </table>
+        </div>
     </div>
-</div>
 
-<div id="confirmationModal" class="modal">
+    <!-- Your confirmation modal -->
+    <div id="confirmationModal" class="modal">
     <div class="modal-content">
         <p>Are you sure you want to delete this item?</p>
         <button id="confirmYes">Yes</button>
         <button id="confirmNo">No</button>
     </div>
-</div>
+    </div>
+
+    <hr class="horizontal-divider">
+    <?php include 'footer.php'; ?>
+
+    <!-- Your JavaScript code -->
+    <script>
+       
 
 
-<hr class="horizontal-divider">
-<?php include 'footer.php'; ?>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
+       document.addEventListener('DOMContentLoaded', function() {
         const quantityInputs = document.querySelectorAll('.quantity-input');
         const itemPrices = document.querySelectorAll('.item-price');
         const itemSubtotals = document.querySelectorAll('.item-subtotal');
@@ -288,8 +272,14 @@
         quantityContainers.forEach(attachQuantityEvents);
 
         updateTotalPrice();
-    });    
-</script>
+    });  
 
+
+    </script>
 </body>
 </html>
+
+<?php
+// Close database connection
+$conn->close();
+?>
