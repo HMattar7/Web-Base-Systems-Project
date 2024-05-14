@@ -94,6 +94,14 @@
 
         $sql = "UPDATE `order` SET `order_status` = 'Done' where order_id =$order_id";
         $result = $conn->query($sql);
+        $sql = "SELECT product_id FROM order_item where order_id = $order_id";
+        $result = $conn->query($sql);
+        while ($row = mysqli_fetch_array($result)) {
+            $product_id = $row['product_id'];
+
+            $sql_product = "UPDATE `product` SET quantity = quantity - 1 WHERE product_id = $product_id";
+            $result_product = $conn->query($sql_product);
+        }
         echo "<script>window.location.href = 'home.php';</script>";
     }
 
