@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 14, 2024 at 06:05 PM
+-- Generation Time: May 14, 2024 at 07:16 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -120,7 +120,9 @@ INSERT INTO `order` (`order_id`, `user_id`, `date_placed`, `order_status`, `tota
 (27, 123, '2024-05-14', 'Done', 8.70),
 (28, 125, '2024-05-14', 'Done', 24.19),
 (29, 125, '2024-05-14', 'Done', 17.36),
-(30, 125, '2024-05-14', 'Done', 6.83);
+(30, 125, '2024-05-14', 'Done', 6.83),
+(31, 125, '2024-05-14', 'Done', 21.51),
+(32, 125, '2024-05-14', 'Done', 1.87);
 
 -- --------------------------------------------------------
 
@@ -159,7 +161,10 @@ INSERT INTO `order_item` (`order_item_id`, `order_id`, `product_id`, `quantity`,
 (57, 28, 1426, 2, 17.36),
 (58, 28, 926, 5, 6.83),
 (59, 29, 1426, 2, 17.36),
-(60, 30, 926, 5, 6.83);
+(60, 30, 926, 5, 6.83),
+(61, 31, 1426, 2, 17.36),
+(62, 31, 1231, 6, 4.15),
+(63, 32, 1011, 6, 1.87);
 
 -- --------------------------------------------------------
 
@@ -563,7 +568,7 @@ INSERT INTO `product` (`product_id`, `category_id`, `title`, `paragraph`, `genre
 (1009, 1, 'Surviving the Aftermath (PC) - Steam Key - GLOBAL', 'Have you always wondered what the world might look like in a post-apocalyptic, gloomy reality? Thanks to Surviving the Aftermath you will be able to find out about it. Moreover, you will be able to build this world as you wish.', 'Strategy', '2013-03-14', 'Steam', '4.33', NULL, 6, 'img1-SurvivingtheAftermath(PC)-SteamKey-GLOBAL', 'img2-SurvivingtheAftermath(PC)-SteamKey-GLOBAL', 'img3-SurvivingtheAftermath(PC)-SteamKey-GLOBAL', 'GLOBAL', 'Key'),
 (1010, 1, 'Call of Duty 4: Modern Warfare Steam Key GLOBAL', 'Call of Duty 4: Modern Warfare is a first-person shooter video game developed by Infinity Ward and released in November 2007 by Activision. The game is a fourth installment in the Call of Duty series and now takes players to the modern times as opposed to its predecessors that were focused on the Second World War. During a single-player campaign, players will assume the role of six different soldiers fighting in various locations across the globe against threats coming from Russian ultranationalists and extremists from the Middle East.', 'Games', '2022-02-08', 'Steam', '14.18', NULL, 4, 'img1-CallofDuty4:ModernWarfareSteamKeyGLOBAL', 'img2-CallofDuty4:ModernWarfareSteamKeyGLOBAL', 'img3-CallofDuty4:ModernWarfareSteamKeyGLOBAL', 'GLOBAL', 'Key');
 INSERT INTO `product` (`product_id`, `category_id`, `title`, `paragraph`, `genre`, `release_date`, `platform`, `price`, `discount`, `quantity`, `image_url_1`, `image_url_2`, `image_url_3`, `region`, `type_of_product`) VALUES
-(1011, 1, '.hack//G.U. Last Recode Steam Key GLOBAL', 'Log back into the .hack//G.U. trilogy and return to ?The World,? as Haseo tracks down Tri-Edge in .hack//G.U. Last Recode, now with enhanced graphics, improved gameplay, and brand new modes!\r\nThis collection includes all 3 original .hack//G.U. titles, Rebirth, Reminisce, and Redemption, all fully restored and remastered. As well as an all new exclusive 4th Volume: .hack//G.U. Reconnection.\r\n\r\n? 15 years of .hack ? Celebrate the 15th anniversary of the beloved global cross media franchise that first released in 2002\r\n\r\n? Fully restored ? Graphically enhanced gameplay and cut scenes now in 1080p and 60fps\r\n\r\n? Improved system features ? Enhanced battle balance and game pacing to provide an optimal experience for new and old fans alike.', 'Games', '2021-02-18', 'Steam', '1.87', NULL, 6, 'img1-.hack//G.U.LastRecodeSteamKeyGLOBAL', 'img2-.hack//G.U.LastRecodeSteamKeyGLOBAL', 'img3-.hack//G.U.LastRecodeSteamKeyGLOBAL', 'GLOBAL', 'Key'),
+(1011, 1, '.hack//G.U. Last Recode Steam Key GLOBAL', 'Log back into the .hack//G.U. trilogy and return to ?The World,? as Haseo tracks down Tri-Edge in .hack//G.U. Last Recode, now with enhanced graphics, improved gameplay, and brand new modes!\r\nThis collection includes all 3 original .hack//G.U. titles, Rebirth, Reminisce, and Redemption, all fully restored and remastered. As well as an all new exclusive 4th Volume: .hack//G.U. Reconnection.\r\n\r\n? 15 years of .hack ? Celebrate the 15th anniversary of the beloved global cross media franchise that first released in 2002\r\n\r\n? Fully restored ? Graphically enhanced gameplay and cut scenes now in 1080p and 60fps\r\n\r\n? Improved system features ? Enhanced battle balance and game pacing to provide an optimal experience for new and old fans alike.', 'Games', '2021-02-18', 'Steam', '1.87', NULL, 5, 'img1-.hack//G.U.LastRecodeSteamKeyGLOBAL', 'img2-.hack//G.U.LastRecodeSteamKeyGLOBAL', 'img3-.hack//G.U.LastRecodeSteamKeyGLOBAL', 'GLOBAL', 'Key'),
 (1012, 1, 'I Am Fish (PC) - Steam Key - GLOBAL', 'I Am Fish is a charming, physics-based adventure starring four intrepid fish friends, forcibly separated from their home in a pet shop fish tank. Swim, fly, roll and chomp your way to the open ocean in a bid for freedom and to re-unite once again.', 'Games', '2019-09-27', 'Steam', '2.74', NULL, 5, 'img1-IAmFish(PC)-SteamKey-GLOBAL', 'img2-IAmFish(PC)-SteamKey-GLOBAL', 'img3-IAmFish(PC)-SteamKey-GLOBAL', 'GLOBAL', 'Key'),
 (1013, 1, 'Stellaris: Plantoids Species Pack (PC) - Steam Key - GLOBAL', 'Stellaris is a 4X grand strategy wargame that takes players to a sci-fi setting, where countless races fight for dominance over the galaxy. With the Plantoids DLC pack, you?ll get a unique opportunity to bring the Plantoids race under your command. Extend the roots of your empire to reach for the furthest stars and devour those who dare to stand in your way.', 'DLCs', '2013-03-14', 'Steam', '4.69', NULL, 2, 'img1-Stellaris:PlantoidsSpeciesPack(PC)-SteamKey-GLOBAL', 'img2-Stellaris:PlantoidsSpeciesPack(PC)-SteamKey-GLOBAL', 'img3-Stellaris:PlantoidsSpeciesPack(PC)-SteamKey-GLOBAL', 'GLOBAL', 'Key'),
 (1014, 1, 'Sniper Ghost Warrior Contracts - Steam - Key GLOBAL', 'Sniper Ghost Warrior Contracts is an upcoming tactical first-person shooter video game developed by CI Games and set to be released in November 2019 by the same company. This is the fifth installment of the Sniper Ghost Warrior series. It lets you play the role of a Seeker, a professional sniper for hire, who is paid for assassinating the chosen targets. The game takes place in various locations across the snowy wilderness of Siberia.', 'Games', '2022-02-08', 'Steam', '4.14', NULL, 5, 'img1-SniperGhostWarriorContracts-Steam-KeyGLOBAL', 'img2-SniperGhostWarriorContracts-Steam-KeyGLOBAL', 'img3-SniperGhostWarriorContracts-Steam-KeyGLOBAL', 'GLOBAL', 'Key'),
@@ -1313,17 +1318,20 @@ CREATE TABLE `user` (
   `first_name` varchar(255) DEFAULT NULL,
   `last_name` varchar(255) DEFAULT NULL,
   `phone_number` int(11) DEFAULT NULL,
-  `country` varchar(100) DEFAULT NULL
+  `country` varchar(100) DEFAULT NULL,
+  `role` varchar(100) NOT NULL DEFAULT 'Customer'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`user_id`, `username`, `email`, `password`, `first_name`, `last_name`, `phone_number`, `country`) VALUES
-(123, 'alisaw', 'alisaw@hotmail.com', '132123132', 'ali', 'saw', 2164651, 'ksa'),
-(124, 'aKhalid', 'alisaw222@hotmail.com', '$2y$10$P2e1ec7NR9NLZ9ZACxMDB.PAt9xqa2O2sW9Id82aH2YvG4JT10Zoe', 'asd', 'sd', 0, 'dws'),
-(125, 'aaa', 'aaa', '$2y$10$AJMWNT2A1gxSlfIGVBtiueLk.ZYIyuMp01Up/XfwCMZL6pr/3K48W', 'aaa', 'aaa', 0, 'aaa');
+INSERT INTO `user` (`user_id`, `username`, `email`, `password`, `first_name`, `last_name`, `phone_number`, `country`, `role`) VALUES
+(123, 'alisaw', 'alisaw@hotmail.com', '132123132', 'ali', 'saw', 2164651, 'ksa', 'Customer'),
+(124, 'aKhalid', 'alisaw222@hotmail.com', '$2y$10$P2e1ec7NR9NLZ9ZACxMDB.PAt9xqa2O2sW9Id82aH2YvG4JT10Zoe', 'asd', 'sd', 0, 'dws', 'Customer'),
+(125, 'aaa', 'aaa', '$2y$10$AJMWNT2A1gxSlfIGVBtiueLk.ZYIyuMp01Up/XfwCMZL6pr/3K48W', 'aaa', 'aaa', 0, 'aaa', 'Customer'),
+(126, 'games4less', 'admin.doe@example.com', '$2y$10$ix3SX3GpshlkEU9MK5rlSOllW3YQ8eSaVhsd4D58I5qRnuvVcQpQm', 'asd', 'asd', 3162, 'ksa', 'Admin'),
+(127, 'wasdw', 'sawasd', '$2y$10$ix3SX3GpshlkEU9MK5rlSOllW3YQ8eSaVhsd4D58I5qRnuvVcQpQm', 'sad', 'sad', 0, 'asd', 'Customer');
 
 --
 -- Indexes for dumped tables
@@ -1420,13 +1428,13 @@ ALTER TABLE `email_message`
 -- AUTO_INCREMENT for table `order`
 --
 ALTER TABLE `order`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `order_item`
 --
 ALTER TABLE `order_item`
-  MODIFY `order_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `order_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT for table `product`
@@ -1438,7 +1446,7 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=126;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=128;
 
 --
 -- Constraints for dumped tables
