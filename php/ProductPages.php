@@ -57,7 +57,6 @@
                 if (!file_exists('./games_images/' . $image_url_3 . '.avif')) { $imagePath3 ="https://placehold.co/600x400/png"; }
 
 
-
                 echo "<section class='game-images'>
                 <img class='main-image round-border' src='$imagePath1' alt='main image'></img>
                 <div class='secondary-images'>
@@ -92,12 +91,28 @@
                 </div>
             </section>
             <section class='default price-box text flex-container-column content-box '>
-                <h2 class='price-header'>$$price</h2>
-                <div class='flex-container-column horizontal-margin buy-buttons'>
-                    <button type='button' class='cart-button horizontal-margin large-font '>Add to Cart</button>
-                    <button type='button' class='Buy-Now-button horizontal-margin large-font'>Buy Now</button>
-                </div>
-                <h2 class='stock-header'>$quantity in stock</h2>"
+                <h2 class='price-header'>$$price</h2>"
+        ?>
+                <?php
+                    if ($quantity == 0) {
+                        echo"
+                        <div class='flex-container-column horizontal-margin buy-buttons'>
+                            <button type='submit' name='add_to_cart' class='cart-button horizontal-margin large-font '>Out of Stock</button>
+                        </div>
+                        <h2 class='stock-header'></h2>";
+                    }else{
+                        echo"
+                        <div class='flex-container-column horizontal-margin buy-buttons'>
+                            <form action='add_to_cart.php' method='post'>
+                                <input type='hidden' name='product_id' value=$product_id>
+                                <input type='hidden' name='price' value=$price>
+                                <input type='hidden' name='quantity' value=$quantity>
+                                <button type='submit' name='add_to_cart' class='cart-button horizontal-margin large-font '>Add to Cart</button>
+                            </form>
+                        </div>
+                        <h2 class='stock-header'>$quantity in stock</h2>";
+                    }
+                    
         ?>
         
             

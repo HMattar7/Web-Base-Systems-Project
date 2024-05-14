@@ -370,7 +370,7 @@
                 if (isset($search_query) && !empty($search_query)) {
                     $select_query = $search_query;
                 }else {
-                    $select_query = "SELECT * FROM `product` WHERE 1=1 $genra_query $platform_query $type_query $region_query $PriceRange_query $sort_query LIMIT $lower_limit, 8";
+                    $select_query = "SELECT * FROM `product` WHERE 1=1  AND quantity > 0 $genra_query $platform_query $type_query $region_query $PriceRange_query $sort_query LIMIT $lower_limit, 8";
                 }
                 $result_query = mysqli_query($db_link, $select_query);
                 while ($row = mysqli_fetch_array($result_query)) {
@@ -433,7 +433,7 @@
                         $select_query = $search_query;
                     }
                     else {
-                        $select_query = "SELECT * FROM `product` WHERE 1=1 $genra_query $platform_query $type_query $region_query $PriceRange_query $sort_query LIMIT $lower_limit, 16";
+                        $select_query = "SELECT * FROM `product` WHERE 1=1 AND quantity > 0 $genra_query $platform_query $type_query $region_query $PriceRange_query $sort_query LIMIT $lower_limit, 16";
                     }
                     $result_query = mysqli_query($db_link, $select_query);
                     $url = "ProductPages.php";
