@@ -16,11 +16,10 @@ if ($conn->connect_error) {
 
 
 
-// Query to select games from the database
-$sql = "SELECT * FROM `product`";
-$result = $conn->query($sql);
-?>
+$user_id = isset($_SESSION["user_id"]) ? $_SESSION["user_id"] : 123;
 
+
+?>
 
 
 
@@ -98,39 +97,55 @@ $result = $conn->query($sql);
             </thead>
             <tbody>
                 <?php
-                // Check if there are any games in the database
-                if ($result->num_rows > 0) {
-                    // Output data of each row
-                    $index = 1;
-                    while($row = $result->fetch_assoc()) {
-                        echo "<tr>";
-                        echo "<td>" . $index . "</td>";
-                        echo "<td>";
-                        echo "<div class='cart-info'>";
-                        echo "<div>";
-                        echo "<p>" . $row["title"] . "</p>";
-                        echo "<small>Price: $" . $row["price"] . "</small><br>";
-                        echo "<button class='delete-button'><img src='images/delete.svg' alt='Delete'></button>";
-                        echo "</div>";
-                        echo "</div>";
-                        echo "</td>";
-                        echo "<td>";
-                        echo "<div class='quantity-container'>";
-                        echo "<input type='number' value='1' class='quantity-input'>";
-                        echo "<div class='quantity-controls'>";
-                        echo "<button class='quantity-up'><img src='images/up.svg' alt='Up'></button>";
-                        echo "<button class='quantity-down'><img src='images/down.svg' alt='Down'></button>";
-                        echo "</div>";
-                        echo "</div>";
-                        echo "</td>";
-                        echo "<td class='item-price'>$" . $row["price"] . "</td>";
-                        echo "<td class='item-subtotal'>$" . $row["price"] . "</td>";
-                        echo "</tr>";
-                        $index++;
+                
+                    $sql = "SELECT order_id FROM `order` where user_id = $user_id";
+                    $result = $conn->query($sql);
+                    $order_id = mysqli_fetch_array($result)[0];
+
+                    $sql = "SELECT product_id FROM order_item where order_id = $order_id";
+                    $result = $conn->query($sql);
+                    while ($row = mysqli_fetch_array($result)) {
+                        $product_id = $row['product_id'];
+                    
+                        $sql_product = "SELECT * FROM `product` WHERE product_id = $product_id";
+                        $result_product = $conn->query($sql_product);
+                    
+                        // Check if there are any products in the database
+                        if ($result_product->num_rows > 0) {
+                            // Output data of each row
+                            $index = 1;
+                            while ($row_product = $result_product->fetch_assoc()) {
+                    
+                                echo "<tr>";
+                                echo "<td>" . $index . "</td>";
+                                echo "<td>";
+                                echo "<div class='cart-info'>";
+                                echo "<div>";
+                                echo "<p>" . $row_product["title"] . "</p>";
+                                echo "<small>Price: $" . $row_product["price"] . "</small><br>";
+                                echo "<button class='delete-button'><img src='images/delete.svg' alt='Delete'></button>";
+                                echo "</div>";
+                                echo "</div>";
+                                echo "</td>";
+                                echo "<td>";
+                                echo "<div class='quantity-container'>";
+                                echo "<input type='number' value='1' class='quantity-input'>";
+                                echo "<div class='quantity-controls'>";
+                                echo "<button class='quantity-up'><img src='images/up.svg' alt='Up'></button>";
+                                echo "<button class='quantity-down'><img src='images/down.svg' alt='Down'></button>";
+                                echo "</div>";
+                                echo "</div>";
+                                echo "</td>";
+                                echo "<td class='item-price'>$" . $row_product["price"] . "</td>";
+                                echo "<td class='item-subtotal'>$" . $row_product["price"] . "</td>";
+                                echo "</tr>";
+                                $index++;
+                            }
+                        } else {
+                            echo "<tr><td colspan='5'>No products found</td></tr>";
+                        }
                     }
-                } else {
-                    echo "<tr><td colspan='5'>No games found</td></tr>";
-                }
+                    
                 ?>
             </tbody>
         </table>

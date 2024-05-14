@@ -14,10 +14,60 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Query to select games from the database
-$sql = "SELECT * FROM `product`";
+
+
+$user_id = isset($_SESSION["user_id"]) ? $_SESSION["user_id"] : 123;
+
+
+
+$sql = "SELECT order_id FROM `order` where user_id = $user_id";
 $result = $conn->query($sql);
+$order_id = mysqli_fetch_array($result)[0];
+
+
+$sql = "SELECT total_price FROM `order` where order_id =$order_id";
+$result = $conn->query($sql);
+
+
+
+
+
+
+
+
+
+if (isset($_POST["checkout-button"])){
+
+    $sql = "UPDATE order SET order_status = 'done' where user_id =$user_id";
+    $result = $conn->query($sql);
+    
+    
+
+
+}
+
+
+
+
+
+
 ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -200,8 +250,8 @@ $result = $conn->query($sql);
                         echo "</div>";
                         echo "</div>";
                         echo "</td>";
-                        echo "<td class='item-price'>$" . $row["price"] . "</td>";
-                        echo "<td class='item-subtotal'>$" . $row["price"] . "</td>";
+                        echo "<td class='item-price'>$" . $row["total_price"] . "</td>";
+                        echo "<td class='item-subtotal'>$" . $row["total_price"] . "</td>";
                         echo "</tr>";
                         $index++;
                     }
@@ -229,7 +279,10 @@ $result = $conn->query($sql);
             </tr>
             <tr>
                 <td colspan="2" class="checkout-button">
-                <button id="checkoutBtn" class="checkout-button" type="button">Checkout</button>
+                
+                <form method=post><button name="checkout-button" id="checkoutBtn" class="checkout-button" type="submit">Checkout</button>
+                </td></form>
+                
                 </td>
             </tr>
         </table>
