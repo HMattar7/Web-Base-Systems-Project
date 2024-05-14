@@ -5,7 +5,7 @@ $servername = "localhost";
 $username = "root"; // Change this to your database username
 $password = "";
 $dbname = "games4less"; // Change this to your database name
-
+$db_link = mysqli_connect("localhost:3306",$username, $password);
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -97,25 +97,24 @@ $user_id = isset($_SESSION["user_id"]) ? $_SESSION["user_id"] : 123;
             </thead>
             <tbody>
                 <?php
-                
-                    $sql = "SELECT order_id FROM `order` where user_id = $user_id";
+                    $sql = "SELECT order_id  FROM `order` WHERE `user_id` = $user_id AND `order_status` = 'Waiting'";
                     $result = $conn->query($sql);
-                    $order_id = mysqli_fetch_array($result)[0];
+                    $order_id = intval(mysqli_fetch_array($result)[0]);
 
                     $sql = "SELECT product_id FROM order_item where order_id = $order_id";
                     $result = $conn->query($sql);
                     while ($row = mysqli_fetch_array($result)) {
                         $product_id = $row['product_id'];
-                    
+
                         $sql_product = "SELECT * FROM `product` WHERE product_id = $product_id";
                         $result_product = $conn->query($sql_product);
-                    
+
                         // Check if there are any products in the database
                         if ($result_product->num_rows > 0) {
                             // Output data of each row
-                            $index = 1;
+                            $index = 0;
                             while ($row_product = $result_product->fetch_assoc()) {
-                    
+
                                 echo "<tr>";
                                 echo "<td>" . $index . "</td>";
                                 echo "<td>";
@@ -123,7 +122,11 @@ $user_id = isset($_SESSION["user_id"]) ? $_SESSION["user_id"] : 123;
                                 echo "<div>";
                                 echo "<p>" . $row_product["title"] . "</p>";
                                 echo "<small>Price: $" . $row_product["price"] . "</small><br>";
-                                echo "<button class='delete-button'><img src='images/delete.svg' alt='Delete'></button>";
+                                echo "<form action='add_to_cart.php' method='post'>";
+                                echo "<input type='hidden' name='delete_item' value='delete_item'>";
+                                echo "<input type='hidden' name='product_id' value='" . $row_product["product_id"] . "'>";
+                                echo "<button type='submit' name='delete_item' class='delete-button'><img src='images/delete.svg' alt='Delete'></button>";
+                                echo "</form>";
                                 echo "</div>";
                                 echo "</div>";
                                 echo "</td>";
@@ -145,7 +148,7 @@ $user_id = isset($_SESSION["user_id"]) ? $_SESSION["user_id"] : 123;
                             echo "<tr><td colspan='5'>No products found</td></tr>";
                         }
                     }
-                    
+                    mysqli_close($db_link);
                 ?>
             </tbody>
         </table>
@@ -199,7 +202,6 @@ $user_id = isset($_SESSION["user_id"]) ? $_SESSION["user_id"] : 123;
         const subtotalElement = document.querySelector('.subtotal');
         const taxElement = document.querySelector('.tax');
         const totalElement = document.querySelector('.total');
-        const deleteButtons = document.querySelectorAll('.delete-button');
         const modal = document.getElementById('confirmationModal');
         const confirmYesBtn = document.getElementById('confirmYes');
         const confirmNoBtn = document.getElementById('confirmNo');

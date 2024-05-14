@@ -12,7 +12,7 @@
             </section>
             <section class="header-icons">
                 <div class="box round-border header-icons">
-                    <a href="settings" class="text lungs-currencies">AR/SR</a>
+                    <a href="settings" class="text lungs-currencies">EN/USD</a>
                 </div>
                 
             </section>

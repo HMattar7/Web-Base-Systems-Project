@@ -58,17 +58,30 @@
                 }
 
                 // SQL query to fetch first 3 game titles and descriptions (for bestsellers)
-                $sql = "SELECT title, paragraph FROM product LIMIT 3"; // Assuming your table name is "games_table"
+                $sql = "SELECT title, paragraph, image_url_1 FROM product LIMIT 3"; // Assuming your table name is "games_table"
                 $result = $conn->query($sql);
+
 
                 // Check if there are rows in the result
                 if ($result->num_rows > 0) {
                     // Output data of each row
                     while ($row = $result->fetch_assoc()) {
+                        $image_url_1 = $row['image_url_1'];
+                        if (file_exists('./games_images/' . $image_url_1 . '.avif')){
+                            $imagePath = './games_images/' . $image_url_1 . '.avif';
+                        }elseif (file_exists('./games_images/' . $image_url_1 . '.jpg')){
+                            $imagePath = './games_images/' . $image_url_1 . '.jpg';
+                        }elseif (file_exists('./games_images/' . $image_url_1 . '.png')){
+                            $imagePath = './games_images/' . $image_url_1 . '.png';
+                        }else{
+                            $imagePath ="https://placehold.co/600x400/png";
+                        }
+
+                        
                         echo "<div class='card'>";
                         echo "<div class='icon'>";
                         echo "<h3>" . $row["title"] . "</h3>";
-                        echo "<a href=''><img class='secondary-image round-border' src='https://placehold.co/600x400/png' alt='secondary image'></a>";
+                        echo "<a href=''><img class='secondary-image round-border' src=$imagePath alt='secondary image'></a>";
                         echo "</div>";
                         echo "<div class='info'>";
                         echo "<p>" . $row["paragraph"] . "</p>";
@@ -105,17 +118,29 @@
                 }
 
                 // SQL query to fetch 3 random game titles and descriptions
-                $sql = "SELECT title, paragraph FROM product ORDER BY RAND() LIMIT 3"; // Assuming your table name is "games_table"
+                $sql = "SELECT title, paragraph, image_url_1 FROM product ORDER BY RAND() LIMIT 3"; // Assuming your table name is "games_table"
                 $result = $conn->query($sql);
 
                 // Check if there are rows in the result
                 if ($result->num_rows > 0) {
                     // Output data of each row
                     while ($row = $result->fetch_assoc()) {
+                        $image_url_1 = $row['image_url_1'];
+                        if (file_exists('./games_images/' . $image_url_1 . '.avif')){
+                            $imagePath = './games_images/' . $image_url_1 . '.avif';
+                        }elseif (file_exists('./games_images/' . $image_url_1 . '.jpg')){
+                            $imagePath = './games_images/' . $image_url_1 . '.jpg';
+                        }elseif (file_exists('./games_images/' . $image_url_1 . '.png')){
+                            $imagePath = './games_images/' . $image_url_1 . '.png';
+                        }else{
+                            $imagePath ="https://placehold.co/600x400/png";
+                        }
+
+
                         echo "<div class='card'>";
                         echo "<div class='icon'>";
                         echo "<h3>" . $row["title"] . "</h3>";
-                        echo "<a href=''><img class='secondary-image round-border' src='https://placehold.co/600x400/png' alt='secondary image'></a>";
+                        echo "<a href=''><img class='secondary-image round-border' src=$imagePath alt='secondary image'></a>";
                         echo "</div>";
                         echo "<div class='info'>";
                         echo "<p>" . $row["paragraph"] . "</p>";
@@ -139,11 +164,12 @@
         <section class="Categories-box">
             <section>
                 <h2 class="title">Categories</h2>
-                <img class="main-image round-border" src="https://placehold.co/600x400/png" alt="main image"></img>
+                <a href="BrowseProducts.php?Navbar=true&Genra=Adventure"><img class="main-image round-border" src="./games_images/adventure.jpeg" alt="main image"></img></a>
             </section>
             <div class="secondary-images">
-                <img class="secondary-image round-border" src="https://placehold.co/600x400/png" alt="secondary image"></img>
-                <img class="secondary-image round-border" src="https://placehold.co/600x400/png" alt="secondary image"></img>
+                <a href="BrowseProducts.php?Navbar=true&Genra=Fighting"><img class="secondary-image round-border" src="./games_images/fighting.jpeg" alt="secondary image"></img></a>
+                <a href="BrowseProducts.php?Navbar=true&Genra=Sports"><img class="secondary-image round-border" src="./games_images/sports.jpeg" alt="secondary image"></img></a>
+                
             </div>
         </section>
     </section>

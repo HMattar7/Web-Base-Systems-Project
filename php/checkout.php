@@ -5,7 +5,7 @@ $servername = "localhost";
 $username = "root"; // Change this to your database username
 $password = "";
 $dbname = "games4less"; // Change this to your database name
-
+$db_link = mysqli_connect("localhost:3306",$username, $password);
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -20,7 +20,7 @@ $user_id = isset($_SESSION["user_id"]) ? $_SESSION["user_id"] : 123;
 
 
 
-$sql = "SELECT order_id FROM `order` where user_id = $user_id";
+$sql = "SELECT order_id FROM `order` where user_id = $user_id AND order_status = 'Waiting'";
 $result = $conn->query($sql);
 $order_id = mysqli_fetch_array($result)[0];
 
@@ -36,15 +36,13 @@ $result = $conn->query($sql);
 
 
 
-if (isset($_POST["checkout-button"])){
+if (isset($_POST["checkout_button"])){
 
-    $sql = "UPDATE order SET order_status = 'done' where user_id =$user_id";
+    $sql = "UPDATE `order` SET `order_status` = 'Done' where order_id =$order_id";
     $result = $conn->query($sql);
-    
-    
-
-
+    header("Location: home.php");
 }
+
 
 
 
@@ -258,6 +256,7 @@ if (isset($_POST["checkout-button"])){
                 } else {
                     echo "<tr><td colspan='5'>No games found</td></tr>";
                 }
+                mysqli_close($db_link);
                 ?>
             </tbody>
         </table>
@@ -280,8 +279,8 @@ if (isset($_POST["checkout-button"])){
             <tr>
                 <td colspan="2" class="checkout-button">
                 
-                <form method=post><button name="checkout-button" id="checkoutBtn" class="checkout-button" type="submit">Checkout</button>
-                </td></form>
+                <button name="checkout_1button" id="checkoutBtn" class="checkout-button" type="submit">Checkout</button>
+                </td>
                 
                 </td>
             </tr>
@@ -335,10 +334,10 @@ if (isset($_POST["checkout-button"])){
 
 <div id="successModal" class="modal">
     <div class="modal-content">
-        <span class="close">&times;</span>
         <h2>Order Successful!</h2>
         <p>Your order has been successfully placed.</p>
-        <button id="closeSuccessModalBtn" class="close">Go to home page</button>
+        <form action="checkout.php" method="post"><button name="checkout_button" id="closeSuccessModalBtn" class="close">Go to home page</button></form>
+        
     </div>
 </div>
 
