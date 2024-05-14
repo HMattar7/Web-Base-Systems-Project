@@ -11,7 +11,7 @@ if ($conn->connect_error) {
 }
 $user_id = isset($_SESSION["user_id"]) ? $_SESSION["user_id"] : 123;  
 
-$sql = "SELECT username, email, first_name, last_name, phone_number, country, shipping_address 
+$sql = "SELECT username, email, first_name, last_name, phone_number, country 
 FROM user 
 WHERE user_id = $user_id";
 
@@ -25,7 +25,6 @@ if ($result->num_rows > 0) {
   $lname = $row["last_name"];
   $phone_number = $row["phone_number"];
   $country = $row["country"];
-  $shipping_address = $row["shipping_address"];
 }
 
 $conn->close();
@@ -60,7 +59,7 @@ $conn->close();
                     <h2><a class="clicked-on" href="./profile-overview.php">Profile</a></h2>
                 </div>
                 <div class="flex-container-row clicked-on">
-                    <h2><a class="clicked-on" href="../Html/manage-profile-information.html">Edit Profile Information</a></h2>
+                    <h2><a class="clicked-on" href="manage-profile-information.html">Edit Profile Information</a></h2>
                 </div>
                 <div class="flex-container-row clicked-on">
                     <h2><a class="clicked-on" href="./order-history.php">Order History</a></h2>

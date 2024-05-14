@@ -1,9 +1,10 @@
 <?php
+session_start();
 if (isset($_POST['add_to_cart'])) {
     $product_id = $_POST['product_id'];
     $price = $_POST['price'];
     $quantity = $_POST['quantity'];
-    $user_id = isset($_SESSION["user_id"]) ? $_SESSION["user_id"] : 123; 
+    $user_id = $_SESSION["user_id"];
 
     $sql_name = "root";
     $sql_pass = "";

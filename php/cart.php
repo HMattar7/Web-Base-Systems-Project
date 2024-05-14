@@ -1,32 +1,3 @@
-
-<?php
-// Database connection
-$servername = "localhost";
-$username = "root"; // Change this to your database username
-$password = "";
-$dbname = "games4less"; // Change this to your database name
-$db_link = mysqli_connect("localhost:3306",$username, $password);
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-
-
-$user_id = isset($_SESSION["user_id"]) ? $_SESSION["user_id"] : 123;
-
-
-?>
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -82,7 +53,25 @@ $user_id = isset($_SESSION["user_id"]) ? $_SESSION["user_id"] : 123;
     
     <hr class="horizontal-divider">
     <?php include 'navbar.php'; ?>
+    <?php
+    // Database connection
+    $servername = "localhost";
+    $username = "root"; // Change this to your database username
+    $password = "";
+    $dbname = "games4less"; // Change this to your database name
+    $db_link = mysqli_connect("localhost:3306",$username, $password);
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
 
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+
+
+    $user_id = isset($_SESSION["user_id"]) ? $_SESSION["user_id"] : 123;
+    ?>
     <div class="small-container cart-page">
         <table class="item-table">
             <caption>Your Cart</caption>

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-    
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,7 +27,28 @@
         <h1>List of Products</h1>
             <a class='btn btn-primary' id ="id1" href='/php/product-management-newProduct.php' role="button">New Product</a>
             <br>
-            <table class="table" id="t1">     
+            <table class="table" id="t1">
+            <!-- <thead>
+                <tr>
+                    <th>product_id</th>
+                    <th>title</th>
+                    <th>paragraph</th>
+                    <th>category_id</th>
+                    <th>genre</th>
+                    <th>release_date</th>
+                    <th>platform</th>
+                    <th>price</th>
+                    <th>discount</th>
+                    <th>quantity</th>
+                    <th>image_url_1</th>
+                    <th>image_url_2</th>
+                    <th>image_url_3</th>
+                    <th>region</th>
+                    <th>type_of_product</th>
+                    <th>Action</th>
+                </tr>
+            </thead> -->
+        
             <tbody>
 
             <?php

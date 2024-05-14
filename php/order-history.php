@@ -26,7 +26,7 @@
                     <h2><a class="clicked-on" href="./profile-overview.php">Profile</a></h2>
                 </div>
                 <div class="flex-container-row clicked-on">
-                    <h2><a class="clicked-on" href="../Html/manage-profile-information.html">Edit Profile Information</a></h2>
+                    <h2><a class="clicked-on" href="manage-profile-information.html">Edit Profile Information</a></h2>
                 </div>
                 <div class="flex-container-row clicked-on">
                     <h2><a class="clicked-on" href="./order-history.php">Order History</a></h2>
