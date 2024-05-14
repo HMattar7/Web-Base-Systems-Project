@@ -14,10 +14,19 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+
+
 // Query to select games from the database
 $sql = "SELECT * FROM `product`";
 $result = $conn->query($sql);
 ?>
+
+
+
+
+
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -143,7 +152,7 @@ $result = $conn->query($sql);
             </tr>
             <tr>
                 <td colspan="2" class="checkout-button">
-                    <button class="checkout-button" type="button">Checkout</button>
+                    <button id="checkoutButton" class="checkout-button" type="button">Checkout</button>
                 </td>
             </tr>
         </table>
@@ -276,8 +285,23 @@ $result = $conn->query($sql);
 
 
     </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Other JavaScript code here...
+
+        // Checkout button event listener
+        const checkoutButton = document.getElementById('checkoutButton');
+        checkoutButton.addEventListener('click', function() {
+            // Redirect to checkout.php
+            window.location.href = 'checkout.php';
+        });
+    });
+</script>
 </body>
 </html>
+
+
 
 <?php
 // Close database connection
