@@ -1,10 +1,7 @@
-<?php
-// Start the session
-session_start();
-?>
+
 
 <header class="default header">
-
+    <?php session_start(); ?>
         <section class="head flex-container-space-between">
             <section class="header-icons">
                 <a href="profile-overview.php" class="box round-border header-icons svg-contaior">
@@ -43,4 +40,4 @@ session_start();
             </form>
         </section>
         </section>
-    
+</header>
