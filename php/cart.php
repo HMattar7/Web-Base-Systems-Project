@@ -1,3 +1,32 @@
+
+<?php
+// Database connection
+$servername = "localhost";
+$username = "root"; // Change this to your database username
+$password = "";
+$dbname = "games4less"; // Change this to your database name
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+
+
+$user_id = isset($_SESSION["user_id"]) ? $_SESSION["user_id"] : 123;
+
+
+?>
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,8 +38,9 @@
     <link href="Product-Pages-styles.css" type="text/css" rel="stylesheet"/>
     <?php include 'head.php'; ?>
 
+    <!-- Your CSS styles -->
     <style>
-        .modal {
+          .modal {
             display: none; 
             position: fixed; 
             z-index: 1; 
@@ -50,105 +80,78 @@
 <body class="flex-container-column background-color">
     <?php include 'header.php'; ?>
     
-<hr class="horizontal-divider">
-<?php include 'navbar.php'; ?>
+    <hr class="horizontal-divider">
+    <?php include 'navbar.php'; ?>
 
+    <div class="small-container cart-page">
+        <table class="item-table">
+            <caption>Your Cart</caption>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                
+                    $sql = "SELECT order_id FROM `order` where user_id = $user_id";
+                    $result = $conn->query($sql);
+                    $order_id = mysqli_fetch_array($result)[0];
 
-<div class="small-container cart-page">
+                    $sql = "SELECT product_id FROM order_item where order_id = $order_id";
+                    $result = $conn->query($sql);
+                    while ($row = mysqli_fetch_array($result)) {
+                        $product_id = $row['product_id'];
+                    
+                        $sql_product = "SELECT * FROM `product` WHERE product_id = $product_id";
+                        $result_product = $conn->query($sql_product);
+                    
+                        // Check if there are any products in the database
+                        if ($result_product->num_rows > 0) {
+                            // Output data of each row
+                            $index = 1;
+                            while ($row_product = $result_product->fetch_assoc()) {
+                    
+                                echo "<tr>";
+                                echo "<td>" . $index . "</td>";
+                                echo "<td>";
+                                echo "<div class='cart-info'>";
+                                echo "<div>";
+                                echo "<p>" . $row_product["title"] . "</p>";
+                                echo "<small>Price: $" . $row_product["price"] . "</small><br>";
+                                echo "<button class='delete-button'><img src='images/delete.svg' alt='Delete'></button>";
+                                echo "</div>";
+                                echo "</div>";
+                                echo "</td>";
+                                echo "<td>";
+                                echo "<div class='quantity-container'>";
+                                echo "<input type='number' value='1' class='quantity-input'>";
+                                echo "<div class='quantity-controls'>";
+                                echo "<button class='quantity-up'><img src='images/up.svg' alt='Up'></button>";
+                                echo "<button class='quantity-down'><img src='images/down.svg' alt='Down'></button>";
+                                echo "</div>";
+                                echo "</div>";
+                                echo "</td>";
+                                echo "<td class='item-price'>$" . $row_product["price"] . "</td>";
+                                echo "<td class='item-subtotal'>$" . $row_product["price"] . "</td>";
+                                echo "</tr>";
+                                $index++;
+                            }
+                        } else {
+                            echo "<tr><td colspan='5'>No products found</td></tr>";
+                        }
+                    }
+                    
+                ?>
+            </tbody>
+        </table>
 
-    <table class="item-table">
-        <caption>Your Cart</caption>
-        <thead>
-        <tr>
-            <th>#</th>
-            <th>Product</th>
-            <th>Quantity</th>
-            <th>Price</th>
-            <th>Subtotal</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>1</td>
-            <td>
-                <div class="cart-info">
-                    <img src="images/gtav.jpg" alt="gta v">
-                    <div>
-                        <p>Grand Theft Auto V</p>
-                        <small>Price: $59.99</small>
-                        <br>
-                        <button class="delete-button"><img src="images/delete.svg" alt="Delete"></button>
-                    </div>
-                </div>
-            </td>
-            <td>
-                <div class="quantity-container">
-                    <input type="number" value="1" class="quantity-input">
-                    <div class="quantity-controls">
-                        <button class="quantity-up"><img src="images/up.svg" alt="Up"></button>
-                        <button class="quantity-down"><img src="images/down.svg" alt="Down"></button>
-                    </div>
-                </div>
-            </td>
-            <td class="item-price">$59.99</td>
-            <td class="item-subtotal">$59.99</td>
-        </tr>
-
-        <tr>
-            <td>2</td>
-            <td>
-                <div class="cart-info">
-                    <img src="images/gtaiv.jpg" alt="gta v">
-                    <div>
-                        <p>Grand Theft Auto IV</p>
-                        <small>Price: $49.99</small>
-                        <br>
-                        <button class="delete-button"><img src="images/delete.svg" alt="Delete"></button>
-                    </div>
-                </div>
-            </td>
-            <td>
-                <div class="quantity-container">
-                    <input type="number" value="1" class="quantity-input">
-                    <div class="quantity-controls">
-                        <button class="quantity-up"><img src="images/up.svg" alt="Up"></button>
-                        <button class="quantity-down"><img src="images/down.svg" alt="Down"></button>
-                    </div>
-                </div>
-            </td>
-            <td class="item-price">$49.99</td>
-            <td class="item-subtotal">$49.99</td>
-        </tr>
-
-        <tr>
-            <td>3</td>
-            <td>
-                <div class="cart-info">
-                    <img src="images/gtasa.jpg" alt="gta v">
-                    <div>
-                        <p>Grand Theft Auto IV</p>
-                        <small>Price: $19.99</small>
-                        <br>
-                        <button class="delete-button"><img src="images/delete.svg" alt="Delete"></button>
-                    </div>
-                </div>
-            </td>
-            <td>
-                <div class="quantity-container">
-                    <input type="number" value="1" class="quantity-input">
-                    <div class="quantity-controls">
-                        <button class="quantity-up"><img src="images/up.svg" alt="Up"></button>
-                        <button class="quantity-down"><img src="images/down.svg" alt="Down"></button>
-                    </div>
-                </div>
-            </td>
-            <td class="item-price">$19.99</td>
-            <td class="item-subtotal">$19.99</td>
-        </tr>
-        </tbody>
-    </table>
-
-    <div class="total-price">
+        <!-- Your total price section -->
+        <div class="total-price">
         <table>
             <tr>
                 <td>Subtotal</td>
@@ -164,27 +167,32 @@
             </tr>
             <tr>
                 <td colspan="2" class="checkout-button">
-                    <button class="checkout-button" type="button">Checkout</button>
+                    <button id="checkoutButton" class="checkout-button" type="button">Checkout</button>
                 </td>
             </tr>
         </table>
+        </div>
     </div>
-</div>
 
-<div id="confirmationModal" class="modal">
+    <!-- Your confirmation modal -->
+    <div id="confirmationModal" class="modal">
     <div class="modal-content">
         <p>Are you sure you want to delete this item?</p>
         <button id="confirmYes">Yes</button>
         <button id="confirmNo">No</button>
     </div>
-</div>
+    </div>
+
+    <hr class="horizontal-divider">
+    <?php include 'footer.php'; ?>
+
+    <!-- Your JavaScript code -->
+    <script>
+       
 
 
-<hr class="horizontal-divider">
-<?php include 'footer.php'; ?>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
+       document.addEventListener('DOMContentLoaded', function() {
         const quantityInputs = document.querySelectorAll('.quantity-input');
         const itemPrices = document.querySelectorAll('.item-price');
         const itemSubtotals = document.querySelectorAll('.item-subtotal');
@@ -288,8 +296,31 @@
         quantityContainers.forEach(attachQuantityEvents);
 
         updateTotalPrice();
-    });    
+    });  
+
+
+    </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Other JavaScript code here...
+
+        // Checkout button event listener
+        const checkoutButton = document.getElementById('checkoutButton');
+        checkoutButton.addEventListener('click', function() {
+            // Redirect to checkout.php
+            window.location.href = 'checkout.php';
+        });
+    });
 </script>
+
 
 </body>
 </html>
+
+
+
+<?php
+// Close database connection
+$conn->close();
+?>

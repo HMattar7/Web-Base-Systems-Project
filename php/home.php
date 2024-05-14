@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
+
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +11,8 @@
 
     <link rel="stylesheet" href="Home-Page-styles.css">
     <?php include 'head.php'; ?>
+
+    
 </head>
 
 
@@ -27,10 +32,10 @@
 
         <section class="container">
             <div class="slider-wrapper">
-                <div class="slider">
-                    <img id="slide-1" src="images/super-weekend-discount-sale-promo-special-ad-design-template-8534c64327a8a8a2a5e7ad15f12a340b_screen.jpg" alt="3D rendering of an imaginary orange planet in space" />
-                    <img id="slide-2" src="images/eid-mega-sale-facebook-cover-video-design-template-b6102fd2ef7acd2ff3b67a20a6d55911_screen.jpg" alt="3D rendering of an imaginary green planet in space" />
-                    <img id="slide-3" src="images/eid-retail.jpg" alt="3D rendering of an imaginary blue planet in space" />
+                <div id="latest-offers-slider" class="slider">
+                    <img id="slide-1" src="images/super-weekend-discount-sale-promo-special-ad-design-template-8534c64327a8a8a2a5e7ad15f12a340b_screen.jpg" alt="Slide 1" />
+                    <img id="slide-2" src="images/eid-mega-sale-facebook-cover-video-design-template-b6102fd2ef7acd2ff3b67a20a6d55911_screen.jpg" alt="Slide 2" />
+                    <img id="slide-3" src="images/eid-retail.jpg" alt="Slide 3" />
                 </div>
                 <div class="slider-nav">
                     <a href="#slide-1"></a>
@@ -43,14 +48,36 @@
 
     <hr class="horizontal-divider">
 
+    <script>
+        const slides = document.querySelectorAll('#latest-offers-slider img');
+        let currentSlide = 0;
+
+        function showSlide(n) {
+            slides.forEach(slide => {
+                slide.style.display = 'none';
+            });
+            slides[n].style.display = 'block';
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        setInterval(nextSlide, 3000); // Change slide every 3 seconds
+    </script>
+    
+
 
    
     <section class="default flex-container-row text">
         
         <section class="cards" id="services" > 
             <h2 class="title">Bestsellers</h2>
+            
 
             <div class="content">
+                
 
                 <div class="card" >
                     <div class="icon">
@@ -88,6 +115,7 @@
         
         </section>
     </section>
+    
 <br><br>
     <section class="default flex-container-row text">
         
