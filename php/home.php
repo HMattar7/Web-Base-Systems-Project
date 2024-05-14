@@ -95,7 +95,7 @@
                 $conn->close();
                 ?>
             </div>
-            <a href="#projects" class="main-btn">More</a>
+            <a href="BrowseProducts.php" class="main-btn">More</a>
         </section>
     </section>
 
@@ -154,7 +154,7 @@
                 $conn->close();
                 ?>
             </div>
-            <a href="#projects" class="main-btn">More</a>
+            <a href="BrowseProducts.php" class="main-btn">More</a>
         </section>
     </section>
 

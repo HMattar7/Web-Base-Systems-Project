@@ -1,34 +1,4 @@
-<?php
 
-$servername = "localhost:3306";
-$username = "root";
-$password = "";
-$dbname = "games4less";
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-}
-$user_id = isset($_SESSION["user_id"]) ? $_SESSION["user_id"] : 123;  
-
-$sql = "SELECT username, email, first_name, last_name, phone_number, country 
-FROM user 
-WHERE user_id = $user_id";
-
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-  $row = $result->fetch_assoc();
-  $username = $row["username"];
-  $email = $row["email"];
-  $fname = $row["first_name"];
-  $lname = $row["last_name"];
-  $phone_number = $row["phone_number"];
-  $country = $row["country"];
-}
-
-$conn->close();
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -47,7 +17,39 @@ $conn->close();
 
     <hr class="horizontal-divider">
     <?php include 'navbar.php'; ?>
+    <?php
+        if (!isset($_SESSION["user_id"])){
+            echo "<script>window.location.href = 'SignIn.php';</script>";
+        }
+        $servername = "localhost:3306";
+        $username = "root";
+        $password = "";
+        $dbname = "games4less";
+        $conn = new mysqli($servername, $username, $password, $dbname);
 
+        if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+        }
+        $user_id = isset($_SESSION["user_id"]) ? $_SESSION["user_id"] : 123;  
+
+        $sql = "SELECT username, email, first_name, last_name, phone_number, country 
+        FROM user 
+        WHERE user_id = $user_id";
+
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $username = $row["username"];
+        $email = $row["email"];
+        $fname = $row["first_name"];
+        $lname = $row["last_name"];
+        $phone_number = $row["phone_number"];
+        $country = $row["country"];
+        }
+
+        $conn->close();
+    ?>
 
     <section class="default flex-container-row text">
         <section class="default text">
