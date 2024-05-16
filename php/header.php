@@ -42,11 +42,11 @@
         <div class="vertical-divider"></div>
         <?php
             if (isset($_SESSION["user_id"])) {
-                echo"<section class='header-icons logout round-border'>
+                echo"<section class='header-icons round-border'>
                 <form action='logout.php' method='post'>
                     <input type='hidden' name='formIdentifier' value='logout-form'>
-                    <button type='submit' name='logout' class='logout round-border'>
-                        <img src='images/logout.svg' alt='logout' width='32px' height='32px' style='cursor: pointer; background-color: white;' class=' round-border'>
+                    <button type='submit' name='logout' class=' round-border'>
+                        <img src='images/logout.svg' alt='logout' width='32px' height='32px' style='cursor: pointer; background-color: white;' class='  round-border'>
                     </button>
                 </form>
             </section>
