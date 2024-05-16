@@ -1,15 +1,41 @@
+<?php
+// Database connection
+$servername = "localhost";
+$username = "root"; // Change this to your database username
+$password = "";
+$dbname = "games4less"; // Change this to your database name
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$user_id = isset($_SESSION["user_id"]) ? $_SESSION["user_id"] : 123;
+
+// Query to get order ID for the user
+$sql = "SELECT order_id FROM `order` WHERE user_id = $user_id";
+$result = $conn->query($sql);
+$order_id = $result->fetch_assoc()['order_id'];
+
+// Query to get products in the user's cart
+$sql = "SELECT p.*, oi.quantity FROM `product` p 
+        JOIN order_item oi ON p.product_id = oi.product_id 
+        WHERE oi.order_id = $order_id";
+$result = $conn->query($sql);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout</title>
-    
+    <title>Shopping Cart</title>
     <link href="checkout-styles.css" type="text/css" rel="stylesheet"/>
     <link href="Product-Pages-styles.css" type="text/css" rel="stylesheet"/>
     <?php include 'head.php'; ?>
-
-    <!-- Your CSS styles -->
     <style>
            .modal {
             display: none; 
@@ -50,37 +76,8 @@
 </head>
 <body class="flex-container-column background-color">
     <?php include 'header.php'; ?>
-    
     <hr class="horizontal-divider">
     <?php include 'navbar.php'; ?>
-    <?php
-    // Database connection
-    $servername = "localhost";
-    $username = "root"; // Change this to your database username
-    $password = "";
-    $dbname = "games4less"; // Change this to your database name
-    $db_link = mysqli_connect("localhost:3306",$username, $password);
-    // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-
-
-    $user_id = isset($_SESSION["user_id"]) ? $_SESSION["user_id"] : 123;
-
-
-
-    $sql = "SELECT order_id FROM `order` where user_id = $user_id AND order_status = 'Waiting'";
-    $result = $conn->query($sql);
-    $order_id = mysqli_fetch_array($result)[0];
-
-
-    $sql = "SELECT total_price FROM `order` where order_id =$order_id";
-    $result = $conn->query($sql);
 
 
 
@@ -88,54 +85,6 @@
 
 
 
-
-
-    if (isset($_POST["checkout_button"])){
-
-        $sql = "UPDATE `order` SET `order_status` = 'Done' where order_id =$order_id";
-        $result = $conn->query($sql);
-        $sql = "SELECT product_id FROM order_item where order_id = $order_id";
-        $result = $conn->query($sql);
-        while ($row = mysqli_fetch_array($result)) {
-            $product_id = $row['product_id'];
-
-            $sql_product = "UPDATE `product` SET quantity = quantity - 1 WHERE product_id = $product_id";
-            $result_product = $conn->query($sql_product);
-        }
-        echo "<script>window.location.href = 'home.php';</script>";
-    }
-
-
-
-
-
-
-
-    ?>
-    <div class="small-container cart-page">
-
-
-
-
-
-
-    <style>
-    .payment-options {
-        margin-bottom: 20px;
-    }
-
-    .payment-method {
-        display: flex;
-        align-items: center;
-        margin-bottom: 10px;
-    }
-
-    .payment-method label {
-        margin-left: 10px;
-        font-size: 16px; /* Adjust as needed */
-        font-weight: bold;
-    }
-</style>
 
 
 
@@ -199,6 +148,9 @@
 
 
 
+
+
+    <div class="small-container cart-page">
         <table class="item-table">
             <caption>Your Cart</caption>
             <thead>
@@ -212,12 +164,11 @@
             </thead>
             <tbody>
                 <?php
-                // Check if there are any games in the database
                 if ($result->num_rows > 0) {
-                    // Output data of each row
                     $index = 1;
                     while($row = $result->fetch_assoc()) {
-                        echo "<tr>";
+                        $subtotal = $row["price"] * $row["quantity"];
+                        echo "<tr data-product-id='" . $row["product_id"] . "' data-order-id='" . $order_id . "'>";
                         echo "<td>" . $index . "</td>";
                         echo "<td>";
                         echo "<div class='cart-info'>";
@@ -230,103 +181,84 @@
                         echo "</td>";
                         echo "<td>";
                         echo "<div class='quantity-container'>";
-                        echo "<input type='number' value='1' class='quantity-input'>";
+                        echo "<input type='number' value='" . $row["quantity"] . "' class='quantity-input'>";
                         echo "<div class='quantity-controls'>";
                         echo "<button class='quantity-up'><img src='images/up.svg' alt='Up'></button>";
                         echo "<button class='quantity-down'><img src='images/down.svg' alt='Down'></button>";
                         echo "</div>";
                         echo "</div>";
                         echo "</td>";
-                        echo "<td class='item-price'>$" . $row["total_price"] . "</td>";
-                        echo "<td class='item-subtotal'>$" . $row["total_price"] . "</td>";
+                        echo "<td class='item-price'>$" . $row["price"] . "</td>";
+                        echo "<td class='item-subtotal'>$" . number_format($subtotal, 2) . "</td>";
                         echo "</tr>";
                         $index++;
                     }
                 } else {
                     echo "<tr><td colspan='5'>No games found</td></tr>";
                 }
-                mysqli_close($db_link);
                 ?>
             </tbody>
         </table>
 
-        <!-- Your total price section -->
         <div class="total-price">
-        <table>
-            <tr>
-                <td>Subtotal</td>
-                <td class="subtotal">$0.00</td>
-            </tr>
-            <tr>
-                <td>Tax</td>
-                <td class="tax">$0.00</td>
-            </tr>
-            <tr>
-                <td>Total</td>
-                <td class="total">$0.00</td>
-            </tr>
-            <tr>
-                <td colspan="2" class="checkout-button">
-                
-                <button name="checkout_1button" id="checkoutBtn" class="checkout-button" type="submit">Checkout</button>
-                </td>
-                
-                </td>
-            </tr>
-        </table>
+            <table>
+                <tr>
+                    <td>Subtotal</td>
+                    <td class="subtotal">$0.00</td>
+                </tr>
+                <tr>
+                    <td>Tax</td>
+                    <td class="tax">$0.00</td>
+                </tr>
+                <tr>
+                    <td>Total</td>
+                    <td class="total">$0.00</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="checkout-button">
+                        <button id="checkoutBtn" class="checkout-button" type="button">Checkout</button>
+
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
 
-    <!-- Your confirmation modal -->
     <div id="confirmationModal" class="modal">
-    <div class="modal-content">
-        <p>Are you sure you want to delete this item?</p>
-        <button id="confirmYes">Yes</button>
-        <button id="confirmNo">No</button>
-    </div>
+        <div class="modal-content">
+            <p>Are you sure you want to delete this item?</p>
+            <button id="confirmYes">Yes</button>
+            <button id="confirmNo">No</button>
+        </div>
     </div>
 
     <hr class="horizontal-divider">
+    <?php include 'footer.php'; ?>
 
+    <button id="checkoutButton">Checkout</button>
 
-    <div id="confirmationModal" class="modal">
+<div id="confirmationModal" class="modal">
     <div class="modal-content">
         <p>Are you sure you want to delete this item?</p>
         <button id="confirmYes">Yes</button>
         <button id="confirmNo">No</button>
-    </div>
-</div>
-
-
-
-<?php include 'footer.php'; ?>
-
-
-
-
-<div id="errorModal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <p id="errorMessage"></p>
     </div>
 </div>
 
 <div id="requiredFieldsModal" class="modal">
     <div class="modal-content">
-        <span class="close">&times;</span>
+        <span class="close">&times;</span> <!-- Close button -->
         <h2>Please Fill In All Required Fields</h2>
         <p>Please make sure to fill in all required fields before proceeding.</p>
     </div>
 </div>
 
 
-
 <div id="successModal" class="modal">
     <div class="modal-content">
         <h2>Order Successful!</h2>
         <p>Your order has been successfully placed.</p>
-        <form action="checkout.php" method="post"><button name="checkout_button" id="closeSuccessModalBtn" class="close">Go to home page</button></form>
-        
+        <button id="closeSuccessModalBtn">Go to home page</button>
     </div>
 </div>
 
@@ -334,8 +266,7 @@
 
 
 
-    <!-- Your JavaScript code -->
-    <script>
+<script>
        
        document.addEventListener('DOMContentLoaded', function() {
         const quantityInputs = document.querySelectorAll('.quantity-input');
@@ -783,7 +714,8 @@
         return madaCardNumber && madaExpiryDate && madaCvv; // Return true if all fields are filled
     }
 });
-</script>
+</script>   
+
 
 </body>
 </html>
@@ -791,4 +723,4 @@
 <?php
 // Close database connection
 $conn->close();
-?>
+?>    
