@@ -175,3 +175,12 @@ a,
   border-radius: 100px;
   z-index: 1;
 }
+.logout{
+  cursor: pointer;
+  /* background-color: white; */
+  width: 32px;
+  height: 32px;
+}
+.logout:hover {
+  background-color: #2cc196;
+}

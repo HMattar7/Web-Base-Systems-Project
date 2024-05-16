@@ -86,7 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <header class="default header">
         <section class="head flex-container-space-between" style="margin: 10%;">
         
-        <a href="home.html" style="text-decoration: none;" class="site-logo">
+        <a href="home.php" style="text-decoration: none;" class="site-logo">
             <img src="images/Logo.svg" alt="Logo">
             <h1 class="text">Games4Less</h1>
         </a>
